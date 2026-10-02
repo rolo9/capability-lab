@@ -35,3 +35,18 @@ The implementation phase will specifically test the boundaries among:
 ## Next edge
 
 Build the smallest executable system and observe where each object actually exists.
+
+
+## Step 0 — Immediate clarification before implementation
+
+After the baseline was recorded, the Human clarified the intended mental model before any correction was given:
+
+> DockerもGitHubもローカルに引っ張ってくるってことを言うべきでした？
+
+Interpretation preserved as evidence rather than correction:
+
+- there was already an operational intuition that remote resources are pulled to the local Mac for use;
+- the unresolved point is the explicit separation of local vs remote objects and the distinct roles of Git/GitHub and Docker image/registry/container;
+- this is treated as a boundary-articulation gap, not absence of prior experience.
+
+This clarification was recorded before Step 1 implementation.
