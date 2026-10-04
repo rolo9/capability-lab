@@ -236,3 +236,126 @@ Remaining uncertainty is intentionally preserved rather than hidden:
 Resume from this checkpoint rather than replaying today's Docker foundations.
 
 Before deleting historical Docker artifacts, finish the bounded reproducibility audit (including Part 2 and any material local-only state). Then return to the Cycle 1 implementation and make lifecycle/recovery part of its Definition of Done.
+
+## Checkpoint — 2026-10-04 — Historical ML Part 1 Recovery Audit
+
+This checkpoint closes the bounded Part 1 recovery audit. It records connected understanding and verified evidence, not a transcript.
+
+### Runtime boundary mechanically traced
+
+The historical Part 1 environment was traced end-to-end:
+
+- Host repository: `/Users/rolo9/workspace/ml-learning-01_Foundations_Part_1`;
+- Host interactive shell: zsh;
+- Host did not expose a `jupyter` command;
+- existing container `my-env` provided Jupyter at `/opt/conda/bin/jupyter`;
+- container working directory was `/work`;
+- Compose resolved the Host repository as a bind mount at container `/work`;
+- Host CSV files under `data/` were visible inside the container under `/work/data`;
+- a tracked notebook was read through container Jupyter and its reference to `../data/sample_data.csv` was mechanically observed.
+
+Durable model:
+
+**Files can be shared across a bind mount while the Host and Container remain separate execution environments. Same working files do not imply the same runtime.**
+
+### Definition → Image → Container direction corrected
+
+A residual articulation gap was exposed when reconstructing the recovery sequence from memory.
+
+Correct generation/recovery direction:
+
+`Repository → build → Image → create/run → Container`
+
+Specific corrections:
+
+- clone the Repository; do not describe this as retrieving the Docker Image from GitHub;
+- `fork` and `clone` are different Git/GitHub operations;
+- build an Image from durable definitions;
+- create/run a Container from the Image.
+
+The gap was not lack of prior Docker use. The individual objects were familiar, but their generation direction could still become mixed when explained without prompts.
+
+### Data placement and recovery
+
+The Part 1 CSV files are intentionally ignored by Git through `data/*`.
+
+This is not automatically a defect. Appropriate storage depends on the data:
+
+- small, self-authored, redistributable fixed fixtures may reasonably be Git-tracked;
+- course attachments, externally licensed data, confidential data, large data, frequently changing data, and database state may require a separate authoritative source.
+
+The reproducibility weakness in Part 1 is therefore not simply “data is outside Git.” The weakness is that the provenance/retrieval/placement procedure for required external data is not durably documented.
+
+Extended data-state questions now include:
+
+- Storage — where is it kept?
+- Access — who can read/write it?
+- Authority — what defines canonical/Current state?
+- Interface — how should it be changed?
+- Verification — how is correctness checked?
+- Provenance — where did it come from?
+- Version — which data state is intended?
+- Recovery — how is it reacquired or regenerated?
+- Distribution — is redistribution permitted?
+
+Key principle:
+
+**Reproducibility does not require putting everything in Git. It requires that every required state can be reacquired or regenerated from an appropriate durable source.**
+
+### Recovery mechanically demonstrated
+
+The existing `my-env` container and historical image were left intact.
+
+From the repository definitions, a separate image was built:
+
+`docker build -t part1-recovery-test .`
+
+The build consumed the Dockerfile/environment definition and produced a new image rather than relying on the historical image.
+
+A fresh temporary container was then run from that image:
+
+`docker run --rm part1-recovery-test python -c "import pandas, sklearn; print('recovery OK')"`
+
+Observed result:
+
+`recovery OK`
+
+Therefore the runtime recovery path from durable repository definitions is mechanically demonstrated.
+
+### Recovery disposition
+
+- Runtime recovery: **PASS — mechanically demonstrated**
+- Code/notebook recovery: **PASS — Git-tracked**
+- Required external data recovery: **PARTIAL — local files exist, durable provenance/retrieval procedure is weak**
+- Byte-for-byte reproducibility: **NOT CLAIMED**
+
+The rebuilt image need not be byte-identical to the historical image. Relevant definitions include mutable/unpinned inputs such as `ubuntu:24.04`, a Miniforge `latest` download, and incompletely pinned package resolution.
+
+Therefore the demonstrated claim is:
+
+**The intended usable runtime can be reconstructed from durable definitions. Exact historical binary identity is not guaranteed.**
+
+### Human understanding after Part 1 audit
+
+The main learning outcome is connection, not additional Docker vocabulary.
+
+Previously familiar points — Git, Dockerfile, environment.yml, Image, Container, Compose, bind mount, CSV, Jupyter — are now connected as a lifecycle:
+
+`Definition → Build → Runtime → State → Persistence → Verification → Recovery`
+
+A further validation principle is now explicit:
+
+**Build success is not recovery proof. Recovery requires verification that the reconstructed environment performs the required behavior.**
+
+### Part 1 audit closure and next edge
+
+Historical ML Part 1 recovery audit is sufficiently closed for the current purpose. No destructive cleanup is implied by this checkpoint.
+
+Return to Cycle 1 implementation in `capability-lab`.
+
+Use a small self-authored synthetic input that is safe and useful to Git-track, then build the smallest reproducible data system while preserving the execution pattern:
+
+`Predict → Ask/Build → Inspect → Run → Break → Diagnose → Modify → Verify → Explain`
+
+Future storage technologies should be introduced from experienced constraints rather than product-first instruction: first experience why a Git-tracked file ceases to be appropriate under changes such as scale, confidentiality, frequent mutation, concurrent access, or application-owned state.
+
