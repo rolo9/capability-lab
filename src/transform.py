@@ -1,4 +1,4 @@
-import csv
+import pandas as pd
 
-with open("data/input.csv", "r") as f:
-    print(f.read())
+df = pd.read_csv("data/input.csv")
+print(df)
