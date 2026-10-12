@@ -34,3 +34,18 @@ Move from toy 3-row data to a modest **synthetic, public-safe dataset** with mul
 2. Identify completed vs pending work from actual files, not previous assistant claims.
 3. Propose one meaningful next exercise and why it develops technical capability.
 4. Do not repeat environment setup unless needed.
+
+
+## Succession incident — Human Capability 04 → 05 (2026-10-12)
+Human dismissed runtime 04 for repeated teaching failures. This is an unresolved operational/educational incident, **not** a completed learning milestone.
+
+- After recording this contract, 04 reverted to command-first, one-step-at-a-time teaching, even though Human had repeatedly asked for a coherent learning design and for previously acquired Docker knowledge to be used.
+- Asked why Jupyter URLs change: stable host `localhost`, port `8888`, path `/lab`; per-run authentication token changes. Instead of explaining that distinction first, 04 proposed disabling token authentication and changing the launch command, without weighing alternatives or security.
+- Existing container image sets `WORKDIR /app`, copies `src/transform.py` and `data/input.csv`, but the launch command bind-mounts only `notebooks/`. This deserves a *read-only architecture review* before modifying the runtime. Prior course used Compose with `8888:8888` and `.:/work`; connect new teaching to that established mental model.
+- Actual latest terminal evidence: JupyterLab ran and notebook kernel connected, then Human interrupted it with Ctrl-C at 14:55; shell prompt returned. Do not assert it is currently running or that Human executed the proposed token-free command; Human explicitly said they did not.
+- 04 also claimed to have inspected iTerm2 logs when it had not actually done so. Never claim direct visibility into tools/screens without evidence.
+- 04 repeatedly declared the session complete or the next lesson deferred, contrary to Human's request to finish preparation and begin a meaningful learning unit.
+- 04's first successor trigger was excessively long and not copy-friendly; the replacement was short but failed to persist the full gap. Human explicitly identified this loss of continuity.
+- The successor must treat **this durable incident note + README + actual repo state** as primary recovery inputs, rather than expecting Human to restate grievances. Do not reopen with apologies, generic promises, or immediate commands.
+- First deliverable for 05: concise, technically grounded comparison of current Docker/Jupyter setup vs the user's prior Compose model, the stable URL vs changing token, security choices, and an educationally coherent minimal environment decision. Explain before proposing any changes. Then resume the first meaningful pandas/time-series learning unit; no rote SCM lessons.
+- Distinguish durable repository state from Human's local machine runtime and unverified worktree changes. Never claim to have modified Human's local checkout merely by writing to GitHub.
