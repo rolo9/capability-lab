@@ -16,38 +16,39 @@ The repository will grow through reproducible learning cycles across:
 
 Frontier AI / AI Native remains the North Star. Real enterprise work may provide evidence, but this repository uses only public-safe or synthetic material and is not an enterprise-work mirror.
 
+## Durable learning path
+
+Capability Lab is intended to close the gap between learning data analysis in a notebook and turning that work into a durable, usable artifact.
+
+The target path is:
+
+**Jupyter exploration → reusable Python modules → tests → Git/GitHub → browser-usable UI → public deployment**
+
+Jupyter Notebook is the exploration surface: inspect data, test hypotheses, visualize, iterate, and explain reasoning. When analysis logic becomes stable and reusable, promote that logic into `src/*.py` rather than leaving the entire result trapped in notebook cells. Verify the promoted logic with tests, preserve the code and reproducible environment in Git, and make the resulting project understandable from its public GitHub repository.
+
+The first substantial public artifact should continue beyond source code alone. The repository should ultimately link to a **Live Demo** that can be opened and interacted with in a browser. Use synthetic or otherwise public-safe data; do not copy confidential enterprise data into this repository. Domain knowledge, including SCM problem framing, may shape the problem and interpretation.
+
+Git, Docker, dependency management, testing, Web UI, and deployment are not separate checklist subjects to rush through. Introduce them when the evolving artifact creates a real need for them. Likewise, do not choose a web framework prematurely; first build a meaningful analysis and reusable logic, then add the next layer when its purpose is concrete.
+
+This path is durable project direction and should survive chat/runtime transitions. A fresh Human Capability runtime should recover this repository state rather than reverting to disconnected Python or ML tutorials.
+
 ## Cycle 1 — Reproducible Data State
 
-The first cycle connects implementation foundations to concepts such as runtime, state, persistence, identity, data representation, and verification.
+Cycle 1 established the initial reproducible execution foundation:
 
-Before building the system, Cycle 1 begins with a Human prediction exercise.
+- Python runtime in Docker
+- source and input data preserved in Git
+- Python base image pinned by digest
+- direct dependency intent recorded in `requirements.txt`
+- resolved dependency versions captured in `requirements.lock`
+- pandas used by the executable transformation
+- recovery from GitHub and container rebuild verified
 
-### Step 0 — Prediction before implementation
-
-Without looking up an answer, write down your current model of these objects:
-
-- Mac / Host
-- Git repository
-- Docker image
-- Docker container
-- input data
-- output data
-
-For each one, answer:
-
-1. Where do you think it exists?
-2. What makes it persist?
-3. If a container is deleted, what do you expect to remain?
-4. Which parts are currently uncertain?
-
-The purpose is not to be correct. The prediction becomes evidence that can be compared with what the running system later reveals.
-
-Record the result in `learning/cycle-01.md` when that file is introduced.
+The conceptual outcome is that reproducibility requires control over code, data, runtime, and dependencies, while pinning also creates an explicit maintenance responsibility.
 
 ## Current state
 
-Repository initialized.
+Cycle 1 reproducibility foundation is complete and pushed to `main`.
 
-**Next edge:** Cycle 1 / Step 0 — Human prediction.
+**Next edge:** add Jupyter to the current reproducible Docker environment and begin exploratory data analysis. Use the notebook for exploration, then deliberately identify the point at which stable logic should be promoted into reusable Python code.
 
-No implementation has been created yet.
