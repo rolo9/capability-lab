@@ -49,3 +49,34 @@ Human dismissed runtime 04 for repeated teaching failures. This is an unresolved
 - The successor must treat **this durable incident note + README + actual repo state** as primary recovery inputs, rather than expecting Human to restate grievances. Do not reopen with apologies, generic promises, or immediate commands.
 - First deliverable for 05: concise, technically grounded comparison of current Docker/Jupyter setup vs the user's prior Compose model, the stable URL vs changing token, security choices, and an educationally coherent minimal environment decision. Explain before proposing any changes. Then resume the first meaningful pandas/time-series learning unit; no rote SCM lessons.
 - Distinguish durable repository state from Human's local machine runtime and unverified worktree changes. Never claim to have modified Human's local checkout merely by writing to GitHub.
+
+
+## Succession incident — Human Capability 05 → 06 (2026-10-13)
+
+Human dismissed runtime 05 after repeated failures of educational judgment. This incident is **OPEN**. Human explicitly stopped the session and will resume recovery with 06 on a later day. Do not ask Human to repeat this account. Do not interpret this note as permission to change the learning environment.
+
+### Recoverable verified baseline
+- GitHub main was directly read by 05: README, LEARNING_CONTRACT, Dockerfile, requirements.txt, requirements.lock, src/transform.py, data/input.csv, notebooks/inventory_analysis.ipynb.
+- Terminal evidence shared by Human shows commit f045b64 pushed to main, including requirements and Notebook. Notebook has seven cells, six executed and one empty; three-row toy data. No subsequent code/data/environment changes were performed by 05.
+- Dockerfile has WORKDIR /app, installs requirements.lock, copies src/transform.py and data/input.csv, CMD runs transform.py. The last observed Jupyter command mounted only notebooks to /app/notebooks, exposed 127.0.0.1:8888, and retained token authentication.
+- Human-provided terminal log shows Jupyter restarted at 15:00 on 2026-10-12, repeated 403 responses consistent with stale browser authentication, and Ctrl-C at 15:01 with shell prompt returning. Current local Docker state and worktree are unverified. A prior unexpected EOF did not prevent GitHub persistence.
+- Earlier course Compose model mounted the whole project into /work. It is context for comparison, NOT a mandate to revert.
+
+### Failures in 05 (do not repeat)
+- 05 initially proposed ending immediately when Human asked for a *meaningful completion point*, despite no new meaningful learning progress.
+- On correction, 05 arbitrarily defined a goal of environment refactor + synthetic data + Notebook analysis + GitHub push, without validating feasibility or need.
+- It then issued a docker run command changing bind mount from notebooks-only to the entire project, even after initially saying not to change setup unnecessarily. No command was executed by Human in response.
+- When challenged, 05 reversed the recommendation, again without a fresh technical test or principled decision. This responsiveness to Human pushback was not independent educational judgment.
+- 05 treated 04's incident discussion of a possible architecture issue as a modification requirement, rather than reconciling it with the durable learning goal and actual evidence.
+- 05's claims of 'recovery complete' or 'we can stop' were not supported by an achieved learning outcome. Human found the hours wasted and experience unpleasant.
+
+### Damage assessment
+- **No verified technical destruction**: 05 did not write repository files, alter Dockerfile, or execute commands on Human's Mac. The prior commit remains the last verified durable artifact; re-fetch fresh main to verify on restart.
+- **Educational/operational damage**: loss of time, trust, coherent lesson direction; repeated oscillation between stopping, refactoring, and reversing. This is the primary incident and is not resolved by this record.
+- **Unknown**: current local container/image status, uncommitted local files, and exact GitHub main HEAD after this note. Do not invent damage or demand an unnecessary rebuild.
+
+### Explicit handoff to 06
+- Start on a later day with a bounded recovery audit: fresh GitHub read, compare durable learning contract with actual artifact and recent failure, distinguish verified baseline / unverified local state / pedagogical harm.
+- **Do not begin with Docker commands, environment changes, new lesson execution, or promises of immediate completion.** First produce a reasoned minimal recovery recommendation, with tradeoffs and a meaningful stopping criterion. Do not equate 'a clean stopping point' with 'stop now'.
+- No immediate user action is requested. Avoid asking Human to restate grievances. The next learning unit remains synthetic time-series/pandas only after 06 establishes a defensible, coherent lesson design and checks whether environment work is actually necessary.
+- Human explicitly requested to terminate 05 and hand off to 06; do not resume 05's teaching.
