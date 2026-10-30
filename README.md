@@ -48,7 +48,9 @@ The conceptual outcome is that reproducibility requires control over code, data,
 
 ## Current state
 
-Cycle 1 reproducibility foundation is complete and pushed to `main`.
+Cycle 1 established the reproducible Docker/Python foundation. JupyterLab is now running in that environment, and `notebooks/inventory_analysis.ipynb` contains synthetic multi-SKU time-series exploration, shipment-versus-consumption analysis, and matplotlib visualization. The notebook and pinned matplotlib dependency were committed in `39f16c1`.
 
-**Next edge:** add Jupyter to the current reproducible Docker environment and begin exploratory data analysis. Use the notebook for exploration, then deliberately identify the point at which stable logic should be promoted into reusable Python code.
+**Next learning edge:** identify one stable analytical transformation in the notebook, make its inputs/outputs explicit, and consider extracting it into `src/*.py` with a small test. Preserve the broader Notebook → reusable Python → tests → browser UI → Live Demo direction; introduce new tooling only when needed.
+
+**Learning history:** [2026-10-30 time-series and reproducibility record](learning/2026-10-30-time-series-and-reproducibility.md). This record describes practice and conceptual observations; it does **not** certify independent Human capability. The distinction between learning history and capability assessment, including the best long-term record structure, remains subject to successor review via an open Issue. The learning contract remains the operating principle.
 
