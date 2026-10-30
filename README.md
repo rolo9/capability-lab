@@ -52,5 +52,7 @@ Cycle 1 established the reproducible Docker/Python foundation. JupyterLab is now
 
 **Next learning edge:** identify one stable analytical transformation in the notebook, make its inputs/outputs explicit, and consider extracting it into `src/*.py` with a small test. Preserve the broader Notebook → reusable Python → tests → browser UI → Live Demo direction; introduce new tooling only when needed.
 
+**HC06 → HC07 succession checkpoint:** [2026-10-30 handoff](learning/2026-10-30-hc06-succession.md). This note supersedes historical next-step instructions where the artifact has already progressed; review open Issue #1 before adopting the provisional recording approach.
+
 **Learning history:** [2026-10-30 time-series and reproducibility record](learning/2026-10-30-time-series-and-reproducibility.md). This record describes practice and conceptual observations; it does **not** certify independent Human capability. The distinction between learning history and capability assessment, including the best long-term record structure, remains subject to successor review via an open Issue. The learning contract remains the operating principle.
 
