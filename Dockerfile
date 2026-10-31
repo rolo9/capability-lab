@@ -5,7 +5,13 @@ WORKDIR /app
 COPY requirements.lock .
 RUN pip install -r requirements.lock
 
-COPY src/transform.py src/transform.py
+# Keep imports independent of the notebook kernel's working directory.
+ENV PYTHONPATH=/app
+
+# A fresh image includes the learning artifact, not only the old CSV script.
+COPY src/ src/
 COPY data/input.csv data/input.csv
+COPY notebooks/ notebooks/
+COPY tests/ tests/
 
 CMD ["python", "src/transform.py"]
