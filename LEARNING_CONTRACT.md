@@ -1,42 +1,68 @@
 # Human Capability — Learning Collaboration Contract
 
 ## Purpose
-Build Human-owned, portable capability in Python, data, statistics/ML, and software by growing one public-safe, reproducible artifact. The Human is already familiar with SCM; do not substitute introductory SCM lectures for technical learning.
 
-## Durable path
-Notebook exploration → reusable `src/*.py` → tests → Git/GitHub → browser UI → public Live Demo. Introduce technology only when a concrete need appears. No premature framework choice.
+**AI-first operation, Human-owned understanding.**
+
+Build durable capability to understand, experiment with, evaluate and keep catching up with ML, DL, Physical AI and other frontier AI / AI Native developments. Python, data handling, statistics, Git, Docker and software delivery are first-stage foundations, not the final goal.
+
+Grow a coherent public-safe artifact and preserve both learning and its meaningful history in GitHub. The Human is already familiar with SCM; do not substitute introductory SCM lectures for technical learning.
+
+## First-artifact path and curriculum judgment
+
+Notebook exploration → reusable `src/*.py` → tests → Git/GitHub → browser UI → public Live Demo.
+
+This is an artifact delivery path, not the whole curriculum. Connect each unit to the analytical question and the longer-term AI learning direction. A small reusable function can teach a useful boundary; endless function extraction or setup work that postpones substantive statistics/ML learning is a failure of curriculum judgment. Do not choose frameworks or Physical AI hardware before their need is concrete.
+
+## Reproducible learning experience
+
+The current scope, coverage, open gaps and next work are maintained in [README Current](README.md#current--hc08-2026-10-31), not in accumulating session instructions inside this contract.
+
+A reader should be able to follow repository instructions to repeat the core learning experiments within the explicitly tested environment, with substantially equivalent results and an explanation of the reasoning. Record prerequisites, build/start/mount/import steps, data inputs, execution order, expected results and verification evidence when implementing a workflow. A local Mac bind mount is valid if its method is documented and does not rely on unpublished state or a particular user's absolute path.
+
+The initial replay target is Apple Silicon Mac + Docker Desktop + containerized Python/Jupyter. Do not claim Windows/other-host compatibility, identical binaries, indefinite future availability, or a completed clean-clone replay without evidence. State practical limits rather than expanding scope without bound.
 
 ## Division of labor
+
 - Human: formulate and understand problems, write/modify substantive learning code, execute and interpret, make decisions.
-- AI: design coherent exercises, explain principles, review code and outcomes, troubleshoot, handle repetitive research/documentation, maintain continuity.
-- AI can generate scaffolding and examples; never confuse AI-produced code with Human-acquired understanding.
+- AI: design coherent exercises, explain principles, review code and outcomes, troubleshoot, handle repetitive research/documentation and maintain operational continuity.
+- AI can generate scaffolding and examples; never confuse AI-produced code or assisted runs with Human-acquired understanding.
+- Distinguish encountered/practiced content from understanding evidenced by explanation or adaptation, and from independently demonstrated capability. An OK acknowledgment alone does not certify any of these.
 
-## Interaction protocol
-- Teach in meaningful units, not a chain of one-line commands and OK acknowledgments.
-- For successful routine runs, a short confirmation suffices; request pasted error text or screenshot only if it changes diagnosis.
-- Use GitHub repository files as the durable review surface. Read repository current before declaring the user's notebook state.
-- Do not require Work or screen integration for routine learning. Classic+iTerm2 is optional for terminal visibility; Jupyter runs in Chrome; Work is not the default because it creates a separate thread and the tested run stopped.
-- Avoid unnecessary setup detours, repetitive SCM basics, unverified claims of screen visibility, and unrequested handoffs.
-- Preserve state in this repo at meaningful milestones, not only in chat. State what was actually written and verified.
+## Interaction and continuity
 
-## Verified checkpoint — 2026-10-12
+- Teach meaningful units with a reason and an observable stopping criterion, not one-line command/OK loops.
+- For successful routine runs, a short confirmation suffices; request error text or screenshots only when needed for diagnosis.
+- Fresh-read GitHub before declaring repository state. Distinguish repository artifacts, dated Mac observations and fresh local verification.
+- Do not claim terminal/screen visibility, local execution, or a changed Mac checkout without actual evidence.
+- Do not require a particular chat surface for learning. The Human chose Work / GPT-6.1 Medium for HC08; older runtime preferences below are historical.
+- Avoid unnecessary setup detours and speculative refactors. Preserve work before environment transitions; do not infer current damage from historical incidents.
+- Preserve meaningful decisions, learning history, verified artifacts and AI-owned operational state proactively; verify writes by read-back.
+- Before changing code or environment, relate the change to learning value, clean-clone replay and eventual public delivery. Do not treat an import workaround as the entire solution.
+- On restart, read README Current, this contract, referenced actual artifacts and open Issues. Use dated records as evidence, not competing current task lists. Do not ask the Human to restate recoverable history.
+
+## Historical evidence — not current instructions
+
+The sections below preserve the earlier checkpoints and failures. Their runtime choices, observations and next-step instructions apply to their dates and recipients; they are not today's task list. README Current supersedes them for current state and sequencing. Retaining these records does not declare the incidents resolved.
+
+### Verified checkpoint — 2026-10-12
 - Repository `rolo9/capability-lab` main includes commit `f045b64`: JupyterLab dependency files and `notebooks/inventory_analysis.ipynb`.
 - Direct GitHub file read verifies **7 cells total**: 6 executed code cells with saved outputs and 1 empty code cell.
 - Executed cells: CSV load; `df.shape`; `df.info()`; `df.describe()`; `df.isna().sum()`; add `monthly_demand` and calculate `inventory_months`. The last calculation **is already executed and saved**, contrary to earlier conversation assumptions.
 - Data remains a 3-row toy example; do not prolong basic SCM interpretation.
 - Docker Jupyter session ended with unexpected EOF; notebook is durable in GitHub. Runtime availability at next session is unverified.
 
-## Next learning unit
+### Next learning unit
 Move from toy 3-row data to a modest **synthetic, public-safe dataset** with multiple SKUs, time periods, stock, demand, and relevant data-quality edge cases. Focus on Python/pandas manipulation and analytical reasoning, not SCM definitions. First define a bounded analytical question and dataset schema; then explore in Notebook. After the exploratory logic stabilizes, extract a reusable function and test it. Keep each step small enough for Human understanding, but substantial enough to yield an artifact.
 
-## Session restart
+### Session restart
 1. Fresh-read README, this contract, and the latest notebook from GitHub.
 2. Identify completed vs pending work from actual files, not previous assistant claims.
 3. Propose one meaningful next exercise and why it develops technical capability.
 4. Do not repeat environment setup unless needed.
 
 
-## Succession incident — Human Capability 04 → 05 (2026-10-12)
+### Succession incident — Human Capability 04 → 05 (2026-10-12)
 Human dismissed runtime 04 for repeated teaching failures. This is an unresolved operational/educational incident, **not** a completed learning milestone.
 
 - After recording this contract, 04 reverted to command-first, one-step-at-a-time teaching, even though Human had repeatedly asked for a coherent learning design and for previously acquired Docker knowledge to be used.
@@ -51,18 +77,18 @@ Human dismissed runtime 04 for repeated teaching failures. This is an unresolved
 - Distinguish durable repository state from Human's local machine runtime and unverified worktree changes. Never claim to have modified Human's local checkout merely by writing to GitHub.
 
 
-## Succession incident — Human Capability 05 → 06 (2026-10-13)
+### Succession incident — Human Capability 05 → 06 (2026-10-13)
 
 Human dismissed runtime 05 after repeated failures of educational judgment. This incident is **OPEN**. Human explicitly stopped the session and will resume recovery with 06 on a later day. Do not ask Human to repeat this account. Do not interpret this note as permission to change the learning environment.
 
-### Recoverable verified baseline
+#### Recoverable verified baseline
 - GitHub main was directly read by 05: README, LEARNING_CONTRACT, Dockerfile, requirements.txt, requirements.lock, src/transform.py, data/input.csv, notebooks/inventory_analysis.ipynb.
 - Terminal evidence shared by Human shows commit f045b64 pushed to main, including requirements and Notebook. Notebook has seven cells, six executed and one empty; three-row toy data. No subsequent code/data/environment changes were performed by 05.
 - Dockerfile has WORKDIR /app, installs requirements.lock, copies src/transform.py and data/input.csv, CMD runs transform.py. The last observed Jupyter command mounted only notebooks to /app/notebooks, exposed 127.0.0.1:8888, and retained token authentication.
 - Human-provided terminal log shows Jupyter restarted at 15:00 on 2026-10-12, repeated 403 responses consistent with stale browser authentication, and Ctrl-C at 15:01 with shell prompt returning. Current local Docker state and worktree are unverified. A prior unexpected EOF did not prevent GitHub persistence.
 - Earlier course Compose model mounted the whole project into /work. It is context for comparison, NOT a mandate to revert.
 
-### Failures in 05 (do not repeat)
+#### Failures in 05 (do not repeat)
 - 05 initially proposed ending immediately when Human asked for a *meaningful completion point*, despite no new meaningful learning progress.
 - On correction, 05 arbitrarily defined a goal of environment refactor + synthetic data + Notebook analysis + GitHub push, without validating feasibility or need.
 - It then issued a docker run command changing bind mount from notebooks-only to the entire project, even after initially saying not to change setup unnecessarily. No command was executed by Human in response.
@@ -70,12 +96,12 @@ Human dismissed runtime 05 after repeated failures of educational judgment. This
 - 05 treated 04's incident discussion of a possible architecture issue as a modification requirement, rather than reconciling it with the durable learning goal and actual evidence.
 - 05's claims of 'recovery complete' or 'we can stop' were not supported by an achieved learning outcome. Human found the hours wasted and experience unpleasant.
 
-### Damage assessment
+#### Damage assessment
 - **No verified technical destruction**: 05 did not write repository files, alter Dockerfile, or execute commands on Human's Mac. The prior commit remains the last verified durable artifact; re-fetch fresh main to verify on restart.
 - **Educational/operational damage**: loss of time, trust, coherent lesson direction; repeated oscillation between stopping, refactoring, and reversing. This is the primary incident and is not resolved by this record.
 - **Unknown**: current local container/image status, uncommitted local files, and exact GitHub main HEAD after this note. Do not invent damage or demand an unnecessary rebuild.
 
-### Explicit handoff to 06
+#### Explicit handoff to 06
 - Start on a later day with a bounded recovery audit: fresh GitHub read, compare durable learning contract with actual artifact and recent failure, distinguish verified baseline / unverified local state / pedagogical harm.
 - **Do not begin with Docker commands, environment changes, new lesson execution, or promises of immediate completion.** First produce a reasoned minimal recovery recommendation, with tradeoffs and a meaningful stopping criterion. Do not equate 'a clean stopping point' with 'stop now'.
 - No immediate user action is requested. Avoid asking Human to restate grievances. The next learning unit remains synthetic time-series/pandas only after 06 establishes a defensible, coherent lesson design and checks whether environment work is actually necessary.
