@@ -67,7 +67,7 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 2. **Notebook comparison completed:** the Human executed and saved the July consumption-drop scenario. At a threshold of 80, MA(3) triggered in August and MA(6) in September. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
 3. **Record the result:** preserve observed output and understanding separately; fix any actual failures, then update this Current and reassess Issue #2 against its full acceptance conditions.
 4. **Exit condition:** repository instructions reproduce the unit within the stated scope, and the Human can explain the analytical meaning and Notebook/module/test relationship. The original Mac edits are available in the local Git stash.
-5. **Jupyter startup shortcut added:** `make up` starts the server and `make jupyter` opens the login URL. Command behavior passed a local check with simulated Docker and browser commands. The first run on Docker Desktop remains to be verified. See the [replay procedure](docs/reproduce.md).
+5. **Jupyter startup shortcut added:** `make up` starts the server and `make jupyter` opens the login URL. On the Mac, `make up` built and started the container and `make jupyter` completed without error. See the [replay procedure](docs/reproduce.md).
 6. **Move onward:** return to the substantive analytical question and next statistics/ML need; evolve the same logic toward browser interaction and public demonstration without extending this into an open-ended infrastructure course.
 
 ## Learning and operational history
