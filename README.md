@@ -34,7 +34,7 @@ This section is the current entry point. The [learning contract](LEARNING_CONTRA
 | Operational incident | [Issue #2](https://github.com/rolo9/capability-lab/issues/2), including architecture-failure comment | OPEN. Clarifying documentation does not prove technical remediation |
 | Recording review | [Issue #1](https://github.com/rolo9/capability-lab/issues/1) | OPEN. HC08 recommends retaining dated records plus this entry point; no proficiency certification or scoring system |
 
-HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from that source revision. See [Current review](learning/2026-10-31-hc08-current-review.md) and the newer [replay preparation/status](learning/2026-10-31-hc08-replay-preparation.md). The Human ran the Docker verification on 2026-11-09, and HC08 confirmed the log. The learning exercise is next. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
+HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from that source revision. See [Current review](learning/2026-10-31-hc08-current-review.md) and the newer [replay preparation/status](learning/2026-10-31-hc08-replay-preparation.md). The Human ran the Docker verification on 2026-11-09, and HC08 confirmed the log. The comparison exercise ran on the Mac. The scope review below sets the next step. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
 
 ## Reproducibility: intended scope and present coverage
 
@@ -68,7 +68,7 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 3. **Record the result:** preserve observed output and understanding separately; fix any actual failures, then update this Current and reassess Issue #2 against its full acceptance conditions.
 4. **Exit condition:** repository instructions reproduce the unit within the stated scope, and the Human can explain the analytical meaning and Notebook/module/test relationship. The original Mac edits are available in the local Git stash.
 5. **Jupyter startup shortcut added:** `make up` starts the server and `make jupyter` opens the login URL. On the Mac, `make up` built and started the container and `make jupyter` completed without error. See the [replay procedure](docs/reproduce.md).
-6. **Move onward:** return to the substantive analytical question and next statistics/ML need; evolve the same logic toward browser interaction and public demonstration without extending this into an open-ended infrastructure course.
+6. **Re-anchor the next unit in Human Capability (2026-11-10):** SCM and demand forecasting supply synthetic examples. Set the transferable technical capability, what the Human will explain or modify and verify, and what evidence or artifact the unit will leave before assigning the next exercise. The recent MAE example exercised forecast-time information boundaries, but its delivery omitted this framing and a stopping criterion. Treat it as an observed Notebook exercise. See the [scope review](learning/2026-11-09-hc08-replay-verification.md#scope-review-2026-11-10).
 
 ## Learning and operational history
 
