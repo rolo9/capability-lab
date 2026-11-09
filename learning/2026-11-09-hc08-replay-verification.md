@@ -8,6 +8,12 @@ The Human ran the agreed adoption and verification script in iTerm. HC08 checked
 - Three unit tests passed in a fresh container without a bind mount.
 - Jupyter nbconvert executed the full Notebook in a new kernel in a separate container without a bind mount. The log reports writing the temporary result and the script's success marker. The kernel emitted a TCP warning and execution completed successfully.
 
-This run verifies the published calculation module, its tests, and Notebook execution within the built image. Fresh-clone replay, uncached installation, and interactive browser development with the documented mount remain separate checks.
+This run verifies the published calculation module, its tests, and Notebook execution within the built image. Fresh-clone replay and uncached installation remain separate checks.
 
 The Human learning exercise remains open. Next, use the same function with windows 3 and 6 and interpret the response to a shipment spike while consumption stays stable. Preserve the Human's explanation separately from the execution result.
+
+## Interactive Jupyter and next workflow
+
+The Human started JupyterLab with the checkout mounted at `/app`. The browser connected through Mac port 8889 to container port 8888. HC08 read the saved local Notebook and confirmed output from the module-reuse cell. July shipment and consumption were both 100, while shipment MA(3) was 33.33 and MA(6) was 100. The Human's interpretation is still pending.
+
+The Human agreed to implement the shorter startup workflow after the current learning exercise. Use `make up` to start Jupyter and `make jupyter` to open the authenticated URL automatically. Keep the generated token and Mac loopback binding. The current browser session is available for the learning exercise.

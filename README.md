@@ -48,7 +48,7 @@ The first verification target is the existing **Apple Silicon Mac + Docker Deskt
 - No indefinite or 30-year execution guarantee is made. Recovery depends on retained sources and availability of referenced dependencies/services. Pinning reduces uncontrolled change and creates a maintenance responsibility; it is not a permanent availability guarantee.
 - Public deployment is a separate verification target: record its build/start requirements, source revision, and a checked Live Demo when implemented.
 
-**Verified scope:** [the replay procedure](docs/reproduce.md) passed from the existing, clean Mac checkout. A fresh clone, a build without cache, and interactive Jupyter startup with a mount remain unverified.
+**Verified scope:** [the replay procedure](docs/reproduce.md) passed from the existing, clean Mac checkout. The interactive Jupyter launch with a mount also passed, including running and saving the module-reuse cell. A fresh clone and a build without cache remain unverified.
 
 ## Development and publication decision
 
@@ -59,7 +59,7 @@ The [replay instructions](docs/reproduce.md) define two complementary workflows.
 1. **Development:** documented build and Jupyter invocation, with deliberate mount mapping, working directory and Python import configuration so Notebook and module edits persist in the checkout.
 2. **Verification/publication:** a clean checkout containing the required code, notebook and data-generation inputs; run the documented procedure and checks without relying on unpublished files or an old container.
 
-HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=/app`, and kernel working directory `/app/notebooks`, preserving the existing CSV relative path. The existing Dockerfile was expanded to include the required files for mount-free checks; no second Dockerfile or Compose layer was added. The checks without a mount passed on the Mac. The development mount still needs a browser session to verify it. See the replay instructions for the rationale and exact commands.
+HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=/app`, and kernel working directory `/app/notebooks`, preserving the existing CSV relative path. The existing Dockerfile was expanded to include the required files for mount-free checks; no second Dockerfile or Compose layer was added. The checks without a mount passed on the Mac. The Human opened JupyterLab using this development mount and saved the Notebook after the module-reuse cell produced output. See the replay instructions for the rationale and exact commands.
 
 ## Next sequence
 
@@ -67,7 +67,8 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 2. **Human learning:** inspect the existing function, expected results and Notebook reuse; compare window 3 with 6 and explain why stable consumption can coexist with a later low shipment average. AI-prepared scaffolding is not a completed Human lesson.
 3. **Record the result:** preserve observed output and understanding separately; fix any actual failures, then update this Current and reassess Issue #2 against its full acceptance conditions.
 4. **Exit condition:** repository instructions reproduce the unit within the stated scope, and the Human can explain the analytical meaning and Notebook/module/test relationship. The original Mac edits are available in the local Git stash.
-5. **Move onward:** return to the substantive analytical question and next statistics/ML need; evolve the same logic toward browser interaction and public demonstration without extending this into an open-ended infrastructure course.
+5. **Simplify Jupyter startup after the current learning exercise:** implement the agreed `make up` and `make jupyter` workflow, with automatic browser opening using the authenticated URL. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
+6. **Move onward:** return to the substantive analytical question and next statistics/ML need; evolve the same logic toward browser interaction and public demonstration without extending this into an open-ended infrastructure course.
 
 ## Learning and operational history
 

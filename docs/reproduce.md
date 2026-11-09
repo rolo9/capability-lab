@@ -4,7 +4,7 @@
 
 Target: Apple Silicon Mac, Docker Desktop with Linux containers, Git, a terminal and a browser. Commands below use zsh/bash syntax and are run from the repository root. Required downloads need network access. Other platforms are not verified.
 
-On 2026-11-09 the Human ran sections 2–4 from the existing Apple Silicon Mac checkout at `90475af` using Docker Desktop. The image built successfully using cached dependencies, all three tests passed, and the full Notebook executed in a new kernel without a mount. A fresh clone, uncached dependency installation, and the interactive development launch in section 5 remain to be verified. See the [verification record](../learning/2026-11-09-hc08-replay-verification.md).
+On 2026-11-09 the Human ran sections 2–4 from the existing Apple Silicon Mac checkout at `90475af` using Docker Desktop. The image built successfully using cached dependencies, all three tests passed, and the full Notebook executed in a new kernel without a mount. The interactive launch in section 5 also passed, including the saved output from the module-reuse cell. A fresh clone and uncached dependency installation remain to be verified. See the [verification record](../learning/2026-11-09-hc08-replay-verification.md).
 
 ## Files and boundaries
 
