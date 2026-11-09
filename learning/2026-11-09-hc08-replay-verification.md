@@ -14,6 +14,12 @@ The Human learning exercise remains open. Next, use the same function with windo
 
 ## Interactive Jupyter and next workflow
 
-The Human started JupyterLab with the checkout mounted at `/app`. The browser connected through Mac port 8889 to container port 8888. HC08 read the saved local Notebook and confirmed output from the module-reuse cell. July shipment and consumption were both 100, while shipment MA(3) was 33.33 and MA(6) was 100. The Human's interpretation is still pending.
+The Human started JupyterLab with the checkout mounted at `/app`. The browser connected through Mac port 8889 to container port 8888. HC08 read the saved local Notebook and confirmed output from the module-reuse cell. July shipment and consumption were both 100, while shipment MA(3) was 33.33 and MA(6) was 100. The later consumption-drop exercise is recorded below.
 
 The Human agreed to implement the shorter startup workflow after the current learning exercise. Use `make up` to start Jupyter and `make jupyter` to open the authenticated URL automatically. Keep the generated token and Mac loopback binding. The current browser session is available for the learning exercise.
+
+## Learning exercise and startup shortcut
+
+The Human ran and saved the scenario with consumption falling from 100 to 60 in July. The saved output showed MA(3) crossing the threshold of 80 or below in August (73.33) and MA(6) reaching it in September (80). At this threshold, the longer window delays investigation by one month because it retains more pre-change observations.
+
+After this exercise, HC08 added the agreed Makefile. `make up` builds and starts the named container, `make jupyter` opens its loopback login URL, and `make down` stops it. The Make recipes and URL selection passed a local check with simulated Docker and browser commands. Docker daemon access from the assistant shell was denied, so live verification of the new shortcut remains pending.

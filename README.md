@@ -64,10 +64,10 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 ## Next sequence
 
 1. **Runtime verification completed on 2026-11-09:** Docker build, three tests without a mount, and full Notebook execution in a new kernel passed at `90475af`.
-2. **Human learning:** inspect the existing function, expected results and Notebook reuse; compare window 3 with 6 and explain why stable consumption can coexist with a later low shipment average. AI-prepared scaffolding is not a completed Human lesson.
+2. **Notebook comparison completed:** the Human executed and saved the July consumption-drop scenario. At a threshold of 80, MA(3) triggered in August and MA(6) in September. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
 3. **Record the result:** preserve observed output and understanding separately; fix any actual failures, then update this Current and reassess Issue #2 against its full acceptance conditions.
 4. **Exit condition:** repository instructions reproduce the unit within the stated scope, and the Human can explain the analytical meaning and Notebook/module/test relationship. The original Mac edits are available in the local Git stash.
-5. **Simplify Jupyter startup after the current learning exercise:** implement the agreed `make up` and `make jupyter` workflow, with automatic browser opening using the authenticated URL. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
+5. **Jupyter startup shortcut added:** `make up` starts the server and `make jupyter` opens the login URL. Command behavior passed a local check with simulated Docker and browser commands. The first run on Docker Desktop remains to be verified. See the [replay procedure](docs/reproduce.md).
 6. **Move onward:** return to the substantive analytical question and next statistics/ML need; evolve the same logic toward browser interaction and public demonstration without extending this into an open-ended infrastructure course.
 
 ## Learning and operational history

@@ -53,17 +53,18 @@ Expected: all cells execute without error. The generated Notebook is intentional
 
 ## 5. Open Jupyter for development
 
-From the root of the checkout used for development:
+On macOS, run these from the repository root with Docker Desktop running:
 
 ```sh
-docker run --rm --publish 127.0.0.1:8889:8888 --mount "type=bind,source=$PWD,target=/app" --workdir /app/notebooks capability-lab:hc08 jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.root_dir=/app
+make up
+make jupyter
 ```
 
-Open `http://localhost:8889/lab` and use the token printed by this new server. The container reports its internal port 8888; the browser uses the mapped host port 8889. Open `notebooks/inventory_analysis.ipynb` in Jupyter. For another free host port, change only the host side and browser URL consistently.
+`make up` builds the image and starts a named background container using the repository mount at `/app`. The Mac and container both use port 8889, and Docker publishes it on Mac loopback. `make jupyter` waits for the login URL and passes it directly to the Mac browser. Open `notebooks/inventory_analysis.ipynb` in JupyterLab.
 
-This whole-project mount hides the files copied into `/app` at build time. That is intentional for editing, and is why the separate mount-free checks matter. Do not use the development session as the sole proof that the published artifact is complete.
+If the earlier foreground server is still using port 8889, save the Notebook and stop that server with Ctrl-C in its terminal before running `make up`. For the background container, save the Notebook and use `make down` when finished. The bind mount keeps the saved files in the checkout.
 
-Save Notebook changes before exiting. Ctrl-C stops the server; `--rm` removes that new container, while bind-mounted files remain in the checkout. Dependencies must be changed in their durable definitions and rebuilt, rather than installed only into a running container.
+The whole-project mount hides the files copied into `/app` at build time. Sections 3–4 verify the image contents independently. To use a different free port, pass the same `PORT` value to both commands, for example `make up PORT=8890` and `make jupyter PORT=8890`.
 
 ## 6. What the learning unit establishes
 
