@@ -4,7 +4,7 @@
 
 Target: Apple Silicon Mac, Docker Desktop with Linux containers, Git, a terminal and a browser. Commands below use zsh/bash syntax and are run from the repository root. Required downloads need network access. Other platforms are not verified.
 
-HC08 inspected an arm64 Mac running macOS 27.2 and Docker CLI 29.9.2. Access to the Docker daemon was denied by the assistant execution sandbox, so the server/Desktop version, image build, tests and clean-kernel Notebook run **have not been verified by HC08**. These are explicit candidate replay instructions. See the [milestone record](../learning/2026-10-31-hc08-replay-preparation.md) for checks actually performed.
+On 2026-11-09 the Human ran sections 2–4 from the existing Apple Silicon Mac checkout at `90475af` using Docker Desktop. The image built successfully using cached dependencies, all three tests passed, and the full Notebook executed in a new kernel without a mount. A fresh clone, uncached dependency installation, and the interactive development launch in section 5 remain to be verified. See the [verification record](../learning/2026-11-09-hc08-replay-verification.md).
 
 ## Files and boundaries
 

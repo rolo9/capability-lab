@@ -1,0 +1,13 @@
+# HC08 Mac integration and replay verification (2026-11-09)
+
+The Human ran the agreed adoption and verification script in iTerm. HC08 checked the local log and Git status.
+
+- Source revision: `90475af71b42792439d450682dda149e48972451`. The Mac checkout fast-forwarded from `39f16c1` and the working tree was clean afterward.
+- The edited Notebook and untracked files were saved in the local Git stash named `HC08 before adopted integration`.
+- The Apple Silicon Mac built `capability-lab:hc08` with Docker Desktop. The pinned base image resolved and the dependency layer was reused from the build cache. Docker server and Desktop version numbers were not captured in this run.
+- Three unit tests passed in a fresh container without a bind mount.
+- Jupyter nbconvert executed the full Notebook in a new kernel in a separate container without a bind mount. The log reports writing the temporary result and the script's success marker. The kernel emitted a TCP warning and execution completed successfully.
+
+This run verifies the published calculation module, its tests, and Notebook execution within the built image. Fresh-clone replay, uncached installation, and interactive browser development with the documented mount remain separate checks.
+
+The Human learning exercise remains open. Next, use the same function with windows 3 and 6 and interpret the response to a shipment spike while consumption stays stable. Preserve the Human's explanation separately from the execution result.

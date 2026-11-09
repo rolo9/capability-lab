@@ -26,15 +26,15 @@ This section is the current entry point. The [learning contract](LEARNING_CONTRA
 
 | Area | Verified repository state / evidence | Remaining work or limit |
 | --- | --- | --- |
-| Notebook | Original exploration from `39f16c1` retained; AI-prepared explanation and module-reuse cell added to [inventory_analysis.ipynb](notebooks/inventory_analysis.ipynb) | New cell is unexecuted; saved earlier outputs do not prove clean-kernel replay |
-| Python | [src/analysis.py](src/analysis.py): existing Human-authored rolling-average function; [tests](tests/test_analysis.py): 3 AI-prepared behavior checks | Python syntax checked; runtime tests pending because HC08 cannot access the Docker daemon |
-| Environment | [Dockerfile](Dockerfile) now includes source/data/notebook/tests and `PYTHONPATH=/app`; pinned runtime and dependencies retained. [Replay steps](docs/reproduce.md) document build, mount-free checks and development mount | Candidate procedure; image build, tests and clean-kernel replay NOT yet run by HC08. Default CSV-script command retained |
-| Mac observations | [HC07 checkpoint](learning/2026-10-31-hc07-succession.md): local rolling-average function ran in a one-off container; Jupyter mounted only notebooks and could not see `src` | Historical observations, not a fresh HC08 inspection. Local file contents, saved notebook edits, running container and sync with main remain unverified |
+| Notebook | Original exploration from `39f16c1` retained; AI-prepared explanation and module-reuse cell added to [inventory_analysis.ipynb](notebooks/inventory_analysis.ipynb) | Full Notebook executed successfully in a new kernel in Docker on 2026-11-09 |
+| Python | [src/analysis.py](src/analysis.py): existing Human-authored rolling-average function; [tests](tests/test_analysis.py): 3 AI-prepared behavior checks | All 3 runtime tests passed on 2026-11-09 |
+| Environment | [Dockerfile](Dockerfile) now includes source/data/notebook/tests and `PYTHONPATH=/app`; pinned runtime and dependencies retained. [Replay steps](docs/reproduce.md) document build, mount-free checks and development mount | Image build and checks without a mount passed on the existing Mac checkout. Dependency installation reused the build cache |
+| Mac observations | [HC07 checkpoint](learning/2026-10-31-hc07-succession.md): local rolling-average function ran in a one-off container; Jupyter mounted only notebooks and could not see `src` | On 2026-11-09 the Mac checkout fast-forwarded to `90475af` with a clean working tree. Prior work was preserved in the local Git stash |
 | Public delivery | Public GitHub repository with notebook and dependency artifacts | No Web UI, hosting choice, or tested Live Demo |
 | Operational incident | [Issue #2](https://github.com/rolo9/capability-lab/issues/2), including architecture-failure comment | OPEN. Clarifying documentation does not prove technical remediation |
 | Recording review | [Issue #1](https://github.com/rolo9/capability-lab/issues/1) | OPEN. HC08 recommends retaining dated records plus this entry point; no proficiency certification or scoring system |
 
-HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from that source revision. See [Current review](learning/2026-10-31-hc08-current-review.md) and the newer [replay preparation/status](learning/2026-10-31-hc08-replay-preparation.md). Module/test/integration files are now preserved, but execution verification and the Human learning unit remain pending.
+HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from that source revision. See [Current review](learning/2026-10-31-hc08-current-review.md) and the newer [replay preparation/status](learning/2026-10-31-hc08-replay-preparation.md). The Human ran the Docker verification on 2026-11-09, and HC08 confirmed the log. The learning exercise is next. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
 
 ## Reproducibility: intended scope and present coverage
 
@@ -48,25 +48,25 @@ The first verification target is the existing **Apple Silicon Mac + Docker Deskt
 - No indefinite or 30-year execution guarantee is made. Recovery depends on retained sources and availability of referenced dependencies/services. Pinning reduces uncontrolled change and creates a maintenance responsibility; it is not a permanent availability guarantee.
 - Public deployment is a separate verification target: record its build/start requirements, source revision, and a checked Live Demo when implemented.
 
-**Present gap:** [candidate replay instructions](docs/reproduce.md) and the required files now exist. A verified clean-clone Notebook/module replay still does not. Do not substitute the historical image name, saved outputs or syntax checks for execution evidence.
+**Verified scope:** [the replay procedure](docs/reproduce.md) passed from the existing, clean Mac checkout. A fresh clone, a build without cache, and interactive Jupyter startup with a mount remain unverified.
 
 ## Development and publication decision
 
 A bind mount is acceptable when its role is explicit and its method is reproducible. It exposes a chosen local checkout inside the container; the local checkout can be on another suitable Mac. The method must be documented using the checkout location as an input, not depend on `/Users/rolo9/...`.
 
-Two complementary workflows are now defined in the [candidate replay instructions](docs/reproduce.md):
+The [replay instructions](docs/reproduce.md) define two complementary workflows.
 
 1. **Development:** documented build and Jupyter invocation, with deliberate mount mapping, working directory and Python import configuration so Notebook and module edits persist in the checkout.
 2. **Verification/publication:** a clean checkout containing the required code, notebook and data-generation inputs; run the documented procedure and checks without relying on unpublished files or an old container.
 
-HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=/app`, and kernel working directory `/app/notebooks`, preserving the existing CSV relative path. The existing Dockerfile was expanded to include the required files for mount-free checks; no second Dockerfile or Compose layer was added. This is a prepared, unverified implementation. The existing Mac checkout and Jupyter container were not modified or replaced. See the replay instructions for the rationale and exact commands.
+HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=/app`, and kernel working directory `/app/notebooks`, preserving the existing CSV relative path. The existing Dockerfile was expanded to include the required files for mount-free checks; no second Dockerfile or Compose layer was added. The checks without a mount passed on the Mac. The development mount still needs a browser session to verify it. See the replay instructions for the rationale and exact commands.
 
 ## Next sequence
 
-1. **Verify the prepared unit:** build from the published source, run the three focused tests without a mount, then execute the Notebook in a clean kernel. HC08 attempted Docker access and received a permission denial; do not label these checks complete.
+1. **Runtime verification completed on 2026-11-09:** Docker build, three tests without a mount, and full Notebook execution in a new kernel passed at `90475af`.
 2. **Human learning:** inspect the existing function, expected results and Notebook reuse; compare window 3 with 6 and explain why stable consumption can coexist with a later low shipment average. AI-prepared scaffolding is not a completed Human lesson.
 3. **Record the result:** preserve observed output and understanding separately; fix any actual failures, then update this Current and reassess Issue #2 against its full acceptance conditions.
-4. **Exit condition:** repository instructions reproduce the unit within the stated scope, and the Human can explain the analytical meaning and Notebook/module/test relationship. Original Mac work remains preserved; reconcile its checkout separately before future local commits.
+4. **Exit condition:** repository instructions reproduce the unit within the stated scope, and the Human can explain the analytical meaning and Notebook/module/test relationship. The original Mac edits are available in the local Git stash.
 5. **Move onward:** return to the substantive analytical question and next statistics/ML need; evolve the same logic toward browser interaction and public demonstration without extending this into an open-ended infrastructure course.
 
 ## Learning and operational history
@@ -76,6 +76,7 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 - [HC06 handoff](learning/2026-10-30-hc06-succession.md) and [HC07 handoff](learning/2026-10-31-hc07-succession.md): historical continuity and incident evidence.
 - [HC08 review](learning/2026-10-31-hc08-current-review.md): current clarification and scope decisions.
 - [HC08 replay preparation](learning/2026-10-31-hc08-replay-preparation.md): fresh Mac file observations, prepared implementation and pending execution checks.
-- [Replay procedure](docs/reproduce.md): candidate instructions for following the learning artifact.
+- [2026-11-09 verification](learning/2026-11-09-hc08-replay-verification.md): Mac integration, Docker build, three passing tests, and Notebook execution without a mount.
+- [Replay procedure](docs/reproduce.md): steps and verification coverage for the learning artifact.
 
 Keep explanations close to the notebook/code when they explain the experiment. Use dated notes for milestone reasoning and AI-owned operational continuity; link rather than duplicate detailed evidence. No record of AI-assisted execution alone establishes independent Human proficiency.
