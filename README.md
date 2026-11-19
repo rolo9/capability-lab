@@ -101,7 +101,7 @@ docker exec capability-lab-jupyter sh -c 'python -m pip install --only-binary=:a
 
 SciPyと既存のNumPyを使うCPU実習なので、XGBoostのインストール時はLinux向けのGPU通信依存を省く。追加パッケージは起動中のコンテナに入る。コンテナを作り直したときはこのインストールを再実行する。
 
-JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb` を開いて **Run → Run All Cells** を選ぶ。最初の実行と深さを変えた実行について、評価値と図をGitHubに記録したら一区切り。実習コードは別のLinux環境で動作を確認済み。MacのDocker/JupyterLabでの実行はこれから確認する。
+JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb` を開いて **Run → Run All Cells** を選ぶ。最初の実行と深さを変えた実行について、評価値と図をGitHubに記録したら一区切り。2026-11-20にMacのDocker/JupyterLabで両方の深さを確認し、[評価値・図・再現手順](learning/2026-11-20-hc08-xgboost.md)を記録した。
 
 ### これまでの到達点
 
