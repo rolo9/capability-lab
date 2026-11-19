@@ -28,7 +28,7 @@ This section is the current entry point. The [learning contract](LEARNING_CONTRA
 | --- | --- | --- |
 | Notebook | Original exploration from `39f16c1` retained; AI-prepared explanation and module-reuse cell added to [inventory_analysis.ipynb](notebooks/inventory_analysis.ipynb) | Full Notebook executed successfully in a new kernel in Docker on 2026-11-09 |
 | Python | [src/analysis.py](src/analysis.py): existing Human-authored rolling-average function; [tests](tests/test_analysis.py): 3 AI-prepared behavior checks | All 3 runtime tests passed on 2026-11-09 |
-| Environment | [Dockerfile](Dockerfile) now includes source/data/notebook/tests and `PYTHONPATH=/app`; pinned runtime and dependencies retained. [Replay steps](docs/reproduce.md) document build, mount-free checks and development mount | Image build and checks without a mount passed on the existing Mac checkout. Dependency installation reused the build cache |
+| Environment | [Dockerfile](Dockerfile) now includes source/data/notebook/tests and `PYTHONPATH=/app`; pinned runtime and dependencies retained. [Replay steps](docs/reproduce.md) document build, mount-free checks and development mount | Existing checkout replay passed on 2026-11-09. A separate clean clone passed the no-cache build, three tests and mount-free Notebook replay on 2026-11-18. See [2026-11-18のクリーン再現検証](https://github.com/rolo9/capability-lab/issues/2#issuecomment-6981231923) |
 | Mac observations | [HC07 checkpoint](learning/2026-10-31-hc07-succession.md): local rolling-average function ran in a one-off container; Jupyter mounted only notebooks and could not see `src` | On 2026-11-09 the Mac checkout fast-forwarded to `90475af` with a clean working tree. Prior work was preserved in the local Git stash |
 | Public delivery | Public GitHub repository with notebook and dependency artifacts | No Web UI, hosting choice, or tested Live Demo |
 | Operational incident | [Issue #2](https://github.com/rolo9/capability-lab/issues/2), including architecture-failure comment | OPEN. Clarifying documentation does not prove technical remediation |
@@ -40,7 +40,7 @@ HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from th
 
 The aim is that the Human's learning and its meaningful history remain in GitHub, and that a reader following the repository can repeat the core experiments and obtain substantially equivalent analytical results. The repo must preserve both **how to run** and **what was learned, questioned, corrected, and remains uncertain**.
 
-The first verification target is the existing **Apple Silicon Mac + Docker Desktop + containerized Python/Jupyter** workflow, reconstructed from a clean clone rather than dependent on one machine's leftover image, container, absolute home path, or uncommitted files. This is a bounded target, not a claim that the complete current workflow has already passed clean-clone verification.
+The first verification target is the existing **Apple Silicon Mac + Docker Desktop + containerized Python/Jupyter** workflow, reconstructed from a clean clone rather than dependent on one machine's leftover image, container, absolute home path, or uncommitted files. This is a bounded target. The clean-clone trial verified the image and mount-free replay at the recorded revision.
 
 - Record the tested host architecture, Docker/runtime versions, source revision, dependency definition, build/start commands, working directory, mount mapping, import setup, data creation/retrieval, execution order, expected results, and actual verification outcome.
 - Repeatability means the relevant calculations, behavior, and interpretation agree; use explicit numerical tolerances where needed. Pixel-identical plots, identical generated binaries, or guaranteed independent Human proficiency are not promised.
@@ -48,7 +48,7 @@ The first verification target is the existing **Apple Silicon Mac + Docker Deskt
 - No indefinite or 30-year execution guarantee is made. Recovery depends on retained sources and availability of referenced dependencies/services. Pinning reduces uncontrolled change and creates a maintenance responsibility; it is not a permanent availability guarantee.
 - Public deployment is a separate verification target: record its build/start requirements, source revision, and a checked Live Demo when implemented.
 
-**Verified scope:** [the replay procedure](docs/reproduce.md) passed from the existing, clean Mac checkout. The interactive Jupyter launch with a mount also passed, including running and saving the module-reuse cell. A fresh clone and a build without cache remain unverified.
+**Verified scope:** [the replay procedure](docs/reproduce.md) passed from the existing, clean Mac checkout. The interactive Jupyter launch with a mount also passed, including running and saving the module-reuse cell. Separately, [2026-11-18のクリーン再現検証](https://github.com/rolo9/capability-lab/issues/2#issuecomment-6981231923) confirmed a fresh clone at `62037c0`, a `--no-cache` build with dependency reinstallation, three passing tests, and full Notebook execution without a host mount. The pinned base image was not forcibly re-pulled.
 
 ## Development and publication decision
 
@@ -62,6 +62,18 @@ The [replay instructions](docs/reproduce.md) define two complementary workflows.
 HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=/app`, and kernel working directory `/app/notebooks`, preserving the existing CSV relative path. The existing Dockerfile was expanded to include the required files for mount-free checks; no second Dockerfile or Compose layer was added. The checks without a mount passed on the Mac. The Human opened JupyterLab using this development mount and saved the Notebook after the module-reuse cell produced output. See the replay instructions for the rationale and exact commands.
 
 ## Next sequence
+
+### 次の優先 — 可視化（2026-11-19）
+
+成果を画面で確かめられる機会が少なく、Macを開ける頻度も進捗を制約している。次は手元の環境に関係なく、成果を見て理解し、改善点を判断できるところから進める。
+
+1. **iPhoneで見る。** [既存Notebook](notebooks/inventory_analysis.ipynb) の合成シナリオ（2026年1〜9月）から、出荷・消費・出荷の3か月移動平均を重ねた静止画を1枚レビューする。まず7月に出荷と消費がともに100なのに、出荷の移動平均が33.3になる理由を図から説明できるか確認し、表示上の改善があれば1点決める。AIが用意した静止画の閲覧・読み取りはMac不要。
+2. **Macで図を再生成して確認する。** 図の読み取り後、Apple Silicon MacでNotebookの既存グラフとモジュール再利用セルを動かし、7月の値を確認する。既存の作業を保全したチェックアウトのルートで、Docker Desktopを起動し、停止中なら `make up`、続けて `make jupyter` を実行する。開いたJupyterLabで `notebooks/inventory_analysis.ipynb` を開き、必要な前段セルを含めて実行する。変更する場合は合意した表示箇所を1点だけ直して再実行し、再現手順と判断をGitHubに残す。[起動・再現手順](docs/reproduce.md)
+3. **ブラウザ公開につなぐ。** 図の内容が固まったら、GitHubから追える形で図と生成手順を残し、ブラウザで見るために必要な最小の公開方法を判断する。公開Live Demoは、そのURLを別端末から開いて確認した時点で検証済みとする。
+
+今回の学習単位は、表の値から伝わる図を作り、データ・計算・表示の関係を説明すること。静止画の生成はAIによる準備であり、Humanの理解とMacでの再生成はレビュー後に確認する。
+
+### これまでの到達点
 
 1. **Runtime verification completed on 2026-11-09:** Docker build, three tests without a mount, and full Notebook execution in a new kernel passed at `90475af`.
 2. **Notebook comparison completed:** the Human executed and saved the July consumption-drop scenario. At a threshold of 80, MA(3) triggered in August and MA(6) in September. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
