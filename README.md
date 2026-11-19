@@ -69,11 +69,17 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 
 需要予測・SCMは合成データの題材として使う。今回身につけるのは、データを図に変え、系列の意味が伝わる表示を選び、同じ入力から図を再生成できる形にする力。
 
-1. **iPhoneで見る。** [既存Notebook](notebooks/inventory_analysis.ipynb) の合成データを使った静止画で、実績値と計算で作った系列を凡例・線種・注釈から区別できるかを見る。表示を変えるなら、どの変更が読み手の理解を助けるかを1点決める。
-2. **Macで図を再生成する。** Apple Silicon MacでDocker Desktopを起動し、既存の作業を保全したチェックアウトのルートで、Jupyterが停止中なら `make up`、続けて `make jupyter` を実行する。JupyterLabで `notebooks/inventory_analysis.ipynb` を開き、前段セルを含めて実行し、既存グラフを表示する。合意した表示変更があれば1点適用し、同じ入力と計算から図を再生成できることを確認する。[起動・再現手順](docs/reproduce.md)
+1. **iPhoneで見る。** [既存Notebook](notebooks/inventory_analysis.ipynb) の合成データを使った静止画で、実績値と計算で作った系列を凡例・線種・注釈から区別できるかを見る。Macを使えるときは、そのまま図の生成に進める。
+2. **Macで図を再生成する。** Apple Silicon MacでDocker Desktopを起動し、既存の作業を保全したチェックアウトのルートで、Jupyterが停止中なら `make up`、続けて `make jupyter` を実行する。JupyterLabで `notebooks/inventory_analysis.ipynb` を開き、前段セルを含めて実行し、既存グラフを表示する。Humanが既存セルを実行して図を生成し、表示する系列を1つ変えて再実行する。図・実行手順・変更して分かったことをGitHubに残す。[起動・再現手順](docs/reproduce.md)
 3. **ブラウザ公開につなぐ。** 図と生成手順をGitHubから追える形で残し、ブラウザで見るために必要な最小の公開方法を判断する。公開Live Demoは、そのURLを別端末から開いて確認した時点で検証済みとする。
 
-この単位の完了条件は、読み手に伝えるための表示上の判断を1つ説明でき、その図を再生成できること。静止画はAIによる準備で、Macでの再生成は次の工程。
+この単位は、Humanが図を生成し、表示する系列を1つ変えた結果と手順をGitHubに残した時点で一区切りとする。
+
+### 可視化の次に試す技術
+
+- **ML:** 小さな公開可能データでXGBoostを学習・実行し、同じ評価データで単純な基準モデルと比較する。実行コード・結果・評価条件をGitHubに残す。需要予測は題材の一つ。
+- **DL:** 小さなニューラルネットを動かし、学習と評価の結果を観察する。学習曲線と再現手順を残す。
+- **Physical AI:** シミュレーションで観測・判断・行動がつながる例を動かし、デモと再現手順を残す。具体的な題材と実機の必要性は、その段階で判断する。
 
 ### これまでの到達点
 
