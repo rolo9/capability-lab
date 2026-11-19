@@ -81,6 +81,28 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 - **DL:** 小さなニューラルネットを動かし、学習と評価の結果を観察する。学習曲線と再現手順を残す。
 - **Physical AI:** シミュレーションで観測・判断・行動がつながる例を動かし、デモと再現手順を残す。具体的な題材と実機の必要性は、その段階で判断する。
 
+### 最初のML実習 — XGBoost
+
+[実習Notebook](notebooks/xgboost_first_run.ipynb)では、2つの測定値から合成スコアを予測する。評価用120行について、学習データの平均を返す基準モデルとXGBoostのMAEと散布図を比べる。最初は `max_depth = 3`、次は `1` で再実行する。
+
+**Apple Silicon Macでの準備。** 既存のJupyterLabコンテナを使う。停止中ならリポジトリのルートから [手順どおり起動](docs/reproduce.md#5-open-jupyter-for-development) する。作業中のチェックアウトに新しいNotebookだけを取り込む場合は、次を同じルートで実行する。
+
+```sh
+git fetch origin main &&
+  git cat-file -e FETCH_HEAD:notebooks/xgboost_first_run.ipynb &&
+  (set -C; git show FETCH_HEAD:notebooks/xgboost_first_run.ipynb > notebooks/xgboost_first_run.ipynb)
+```
+
+コンテナ起動後、この実習の依存パッケージを入れる。
+
+```sh
+docker exec capability-lab-jupyter sh -c 'python -m pip install --only-binary=:all: -c /app/requirements.lock scipy==1.17.1 && python -m pip install --only-binary=:all: --no-deps xgboost==3.2.0'
+```
+
+SciPyと既存のNumPyを使うCPU実習なので、XGBoostのインストール時はLinux向けのGPU通信依存を省く。追加パッケージは起動中のコンテナに入る。コンテナを作り直したときはこのインストールを再実行する。
+
+JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb` を開いて **Run → Run All Cells** を選ぶ。最初の実行と深さを変えた実行について、評価値と図をGitHubに記録したら一区切り。実習コードは別のLinux環境で動作を確認済み。MacのDocker/JupyterLabでの実行はこれから確認する。
+
 ### これまでの到達点
 
 1. **Runtime verification completed on 2026-11-09:** Docker build, three tests without a mount, and full Notebook execution in a new kernel passed at `90475af`.
