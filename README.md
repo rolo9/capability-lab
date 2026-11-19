@@ -73,7 +73,7 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 2. **Macで図を再生成する。** Apple Silicon MacでDocker Desktopを起動し、既存の作業を保全したチェックアウトのルートで、Jupyterが停止中なら `make up`、続けて `make jupyter` を実行する。JupyterLabで `notebooks/inventory_analysis.ipynb` を開き、前段セルを含めて実行し、既存グラフを表示する。Humanが既存セルを実行して図を生成し、表示する系列を1つ変えて再実行する。図・実行手順・変更して分かったことをGitHubに残す。[起動・再現手順](docs/reproduce.md)
 3. **ブラウザ公開につなぐ。** 図と生成手順をGitHubから追える形で残し、ブラウザで見るために必要な最小の公開方法を判断する。公開Live Demoは、そのURLを別端末から開いて確認した時点で検証済みとする。
 
-この単位は、Humanが図を生成し、表示する系列を1つ変えた結果と手順をGitHubに残した時点で一区切りとする。
+**2026-11-19に可視化の実習を完了。** MacのJupyterLabで表示する系列を一つ変更し、再実行した図と手順を[学習記録](learning/2026-11-19-hc08-visualization.md)に保存した。次の実習はXGBoostを実行し、基準モデルと比較する。
 
 ### 可視化の次に試す技術
 
