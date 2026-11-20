@@ -63,6 +63,12 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 
 ## Next sequence
 
+### 次の学習 — 予測が判断に役立つ条件
+
+2026-11-20のXGBoostは実行結果を確認済み。学習者から、ライブラリを使う理由やコードが担う処理を理解できないまま操作が先行したというフィードバックがあった。実行確認と学習の到達は別に記録する。[実行結果と再開する題材](learning/2026-11-20-hc08-xgboost.md#学習の振り返りと再開点)
+
+次は、通勤の出発判断を例に、予測時に分かる情報、手元の記録から作る単純な予測、小さい誤差と遅刻回避の違いを確認する。条件の分け方を人が決める場合とデータから選ぶ場合をつないでから、用途が見えた処理を短いコードにする。最初の比較はiPhoneでも進められる。
+
 ### 次の優先 — 可視化（2026-11-19）
 
 成果を画面で確かめられる機会が少なく、Macを開ける頻度も進捗を制約している。次は手元の環境に関係なく、成果を見て理解し、改善点を判断できるところから進める。
@@ -101,7 +107,7 @@ docker exec capability-lab-jupyter sh -c 'python -m pip install --only-binary=:a
 
 SciPyと既存のNumPyを使うCPU実習なので、XGBoostのインストール時はLinux向けのGPU通信依存を省く。追加パッケージは起動中のコンテナに入る。コンテナを作り直したときはこのインストールを再実行する。
 
-JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb` を開いて **Run → Run All Cells** を選ぶ。最初の実行と深さを変えた実行について、評価値と図をGitHubに記録したら一区切り。2026-11-20にMacのDocker/JupyterLabで両方の深さを確認し、[評価値・図・再現手順](learning/2026-11-20-hc08-xgboost.md)を記録した。
+JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb` を開いて **Run → Run All Cells** を選ぶ。評価値と図は実行の記録として残す。2026-11-20にMacのDocker/JupyterLabで両方の深さを確認し、[評価値・図・再現手順](learning/2026-11-20-hc08-xgboost.md)を記録した。
 
 ### これまでの到達点
 
