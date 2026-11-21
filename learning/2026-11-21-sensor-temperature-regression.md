@@ -70,6 +70,67 @@ for name, predict in {
 
 </details>
 
+## 失敗を受けた再検証 — 当日の校正を使う
+
+前の検証では、6日目の両端で固定直線が外れ、同じ直線を毎日使う前提を見直す手掛かりになった。そこで、始業前に既知の100 gのおもりで20 ℃と30 ℃のずれを測れる運用を仮定する。当日の平均を返す方法と、同じ2点を結ぶ当日の線形回帰を比べる。評価用の21・25・29 ℃の観測値は予測を作る処理に渡さない。
+
+[再検証用CSV](../data/sensor-temperature/daily-calibration-check.csv)は別の架空4日分。日によって温度とずれの関係が変わる場合を意図的に含めた。全手法に同じ評価12件を使い、絶対誤差1.00 g以内が90％以上という前回の基準を適用した。
+
+| 手法 | MAE | 許容内 | 判定 |
+| --- | ---: | ---: | --- |
+| 固定の平均 | 0.82 g | 8/12 | 未達 |
+| 固定の線形回帰 | 0.83 g | 9/12 | 未達 |
+| 当日の2点の平均 | 0.77 g | 5/12 | 未達 |
+| 当日の2点で線形回帰 | 0.18 g | 11/12 | 合格 |
+
+8日目は温度に対するずれの傾きが1日目と逆。固定の直線は21 ℃と29 ℃で逆方向に予測した。当日の平均も傾きを持てない。当日の直線は2点から逆向きの関係を反映できた。10日目の25 ℃では当日の直線も1.10 g外れた。
+
+この架空の運用では当日校正付きの線形回帰を採用候補にできる。実機での判定には、始業前に2点測れること、その手間に見合うこと、実際の運用日に許容内率を満たすことの確認が必要。
+
+<details>
+<summary>再検証を再実行するPythonコード</summary>
+
+リポジトリのルートで実行する。2点での単回帰は2点を結ぶ直線になる。
+
+```python
+from csv import DictReader
+from decimal import Decimal as D
+from pathlib import Path
+from statistics import mean
+
+path = Path("data/sensor-temperature/daily-calibration-check.csv")
+rows = list(DictReader(path.read_text().splitlines()))
+errors = {name: [] for name in ("fixed_mean", "fixed_linear", "daily_mean", "daily_linear")}
+for day in sorted({int(row["day"]) for row in rows}):
+    day_rows = [row for row in rows if int(row["day"]) == day]
+    calibration = [(D(row["temperature_c"]), D(row["offset_g"]))
+                   for row in day_rows if row["phase"] == "calibration"]
+    (x1, y1), (x2, y2) = calibration
+    slope = (y2 - y1) / (x2 - x1)
+    for row in day_rows:
+        if row["phase"] != "evaluation":
+            continue
+        x, y = D(row["temperature_c"]), D(row["offset_g"])
+        predictions = {
+            "fixed_mean": D("0"),
+            "fixed_linear": D("0.30") * x - D("7.50"),
+            "daily_mean": mean((y1, y2)),
+            "daily_linear": y1 + slope * (x - x1),
+        }
+        for name, prediction in predictions.items():
+            errors[name].append((day, x, abs(prediction - y)))
+
+for name, results in errors.items():
+    absolute_errors = [error for _, _, error in results]
+    failures = [(day, str(x), str(error)) for day, x, error in results if error > D("1.00")]
+    within = len(results) - len(failures)
+    passed = D(within) / len(results) >= D("0.90")
+    print(f"{name}: MAE={mean(absolute_errors):.2f}, within={within}/{len(results)}, "
+          f"pass={passed}, failures={failures}")
+```
+
+</details>
+
 ## Hiroさん自身の予想と解釈
 
 - 実行前の予想
