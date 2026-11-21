@@ -22,6 +22,12 @@
 
 合成データでは傾きの有無だけで、直線を使う価値が変わった。公開Autoは[ISLPのデータ説明](https://intro-stat-learning.github.io/ISLP/0.4.1/datasets/Auto.html)にある実測データ。馬力を入力、燃費を予測値とし、新しい年式でも過去の関係が使えるかを確認するため年式で分割した。今回の分割では平均に対して改善した。用途に合わせた許容誤差と、その用途を代表する評価データがあれば採用の判断に進める。
 
+### 公開データの出典と利用形態
+
+使用したファイルは、James、Witten、Hastie、Tibshirani、Taylorの教科書に付属する [ISLP Python版 Autoデータ](https://intro-stat-learning.github.io/ISLP/0.4.1/datasets/Auto.html) の[固定版Auto.csv](https://github.com/intro-stat-learning/ISLP/blob/46fb7dfaa39a41c007c627cc6a90dba3a88e5b2c/ISLP/data/Auto.csv)。ISLPの説明では、原資料はCarnegie Mellon UniversityのStatLibで、ISLP版は馬力が欠損している行を除いた392件。本実習ではこのCSVを参照し、馬力・燃費・年式を取り出して年式で分割した。
+
+[ISLPのリポジトリにあるLICENSE](https://github.com/intro-stat-learning/ISLP/blob/46fb7dfaa39a41c007c627cc6a90dba3a88e5b2c/LICENSE)はソフトウェアについて記載しており、確認したISLP資料ではこのCSV固有の再配布条件を確認できなかった。[UCIのAuto MPG](https://archive.ics.uci.edu/dataset/9/auto%2Bmpg)はCC BY 4.0と明記された別配布版で、本実習の入力には使っていない。Capability Labには、ISLPの元ファイルへのリンク、分析手順、集計結果を記録した。再実行時は上流の固定版から取得する。
+
 ## 再実行する
 
 [固定版のAuto.csv](https://github.com/intro-stat-learning/ISLP/blob/46fb7dfaa39a41c007c627cc6a90dba3a88e5b2c/ISLP/data/Auto.csv)を作業フォルダに保存し、同じ場所で次のPythonコードを実行する。合成データはコード内の生成式と固定シードから再生成する。平均と単回帰は[センサーNotebook](../notebooks/sensor-temperature-regression.ipynb)で用いた計算と同じ。

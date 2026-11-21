@@ -24,6 +24,10 @@ A reader should be able to follow repository instructions to repeat the core lea
 
 The initial replay target is Apple Silicon Mac + Docker Desktop + containerized Python/Jupyter. Do not claim Windows/other-host compatibility, identical binaries, indefinite future availability, or a completed clean-clone replay without evidence. State practical limits rather than expanding scope without bound.
 
+### External datasets and attribution
+
+For each external dataset, record its name and provider, the original source and exact version or file used, the published license or terms and their source, the required citation, and any changes made for the experiment. When public redistribution is permitted, retain the required notices with the files and record any changes. When reuse is permitted but redistribution is unclear, link to the original download and document how to reproduce the analysis. If the intended use is unclear under the published terms, choose another dataset or obtain permission first.
+
 ## Division of labor
 
 - Human: formulate and understand problems, write/modify substantive learning code, execute and interpret, make decisions.
