@@ -63,7 +63,7 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 
 ## Next sequence
 
-[学習ロードマップ](ROADMAP.md)に、基礎からML、DL、Physical AIへのつながりと、手法・ライブラリ・分析対象の対応を記載している。再開点は、同じ数値予測を線形回帰と決定木がどう表すかの比較。XGBoostは勾配ブースティングの実装として、この地図に位置づける。
+[学習ロードマップ](ROADMAP.md)に、基礎からML、DL、Physical AIへのつながりと、手法・ライブラリ・分析対象の対応を記載している。入口は、過去の記録から新しい1件を予測し、結果を評価する流れ。線形回帰と決定木の比較およびXGBoost実習の続きは、この土台を押さえてから再開する。
 
 Macでの[可視化実習](learning/2026-11-19-hc08-visualization.md)と[XGBoost実行結果](learning/2026-11-20-hc08-xgboost.md)は、再現可能な記録として保存した。
 
