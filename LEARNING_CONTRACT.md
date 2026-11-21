@@ -24,6 +24,10 @@ A reader should be able to follow repository instructions to repeat the core lea
 
 The initial replay target is Apple Silicon Mac + Docker Desktop + containerized Python/Jupyter. Do not claim Windows/other-host compatibility, identical binaries, indefinite future availability, or a completed clean-clone replay without evidence. State practical limits rather than expanding scope without bound.
 
+### Choosing data for a learning exercise
+
+Before selecting or generating data, state the concept to learn, the contrast the exercise should expose, and why each method is expected to behave differently. Prefer a published teaching or benchmark dataset when it exposes the contrast clearly. For synthetic data, specify the data-generating assumptions, vary the condition that should change the result, and keep other conditions comparable. Fix the comparison and evaluation split before running it, and run the exercise once to check that the intended lesson is visible before presenting it. Use held-out observations and document which conclusions are demonstrated by construction and which are supported by external data. Preserve the data and experiment version through repository history or a pinned upstream reference.
+
 ### External datasets and attribution
 
 For each external dataset, record its name and provider, the original source and exact version or file used, the published license or terms and their source, the required citation, and any changes made for the experiment. When public redistribution is permitted, retain the required notices with the files and record any changes. When reuse is permitted but redistribution is unclear, link to the original download and document how to reproduce the analysis. If the intended use is unclear under the published terms, choose another dataset or obtain permission first.
