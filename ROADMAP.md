@@ -76,7 +76,7 @@
 
 この単位では、学習に使う記録と評価に使う記録の違い、基準を置く理由を、一つの事例と結びつける。概念を押さえたら、線形回帰・k近傍法・決定木を、この流れの中で「データから何を使って予測するか」という観点で見比べる。必要な数学は手法とつないで確認する。
 
-現在の実習は[温度でセンサーのずれを予測できるか](learning/2026-11-21-sensor-temperature-regression.md)。単回帰と平均基準を、学習に使わなかった別の日の記録で比較する。
+[平均と線形回帰](learning/2026-11-21-mean-vs-linear.md)で入力を使う価値を比較した。現在は[直線と2次式](learning/2026-11-21-linear-vs-quadratic.md)で、モデルの形を変えた効果を全体と条件別の誤差で見る。次の比較では、この評価の型を決定木へ持ち越す。
 
 主に参照する公開教材は、[Harvard Stat 110](https://stat110.hsites.harvard.edu/)と[MIT 18.650](https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/)で確率・統計、[Stanford STATS 202](https://web.stanford.edu/class/stats202/)と[ISLP Python版](https://www.statlearning.com/)で統計的機械学習、[Stanford CS231n（2026年春）](https://cs231n.stanford.edu/2026/schedule.html)で深層学習。ロボティクスの力学・状態推定・制御を並行する枝として置き、[MIT Robotic Manipulation（2026年秋）](https://manipulation.csail.mit.edu/Fall2026/)で知覚・計画・制御と学習をつなぐ。[Stanford CS224R（2026年春）](https://cs224r.stanford.edu/)は模倣学習・強化学習の段階で使う。
 
