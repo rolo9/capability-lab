@@ -34,7 +34,7 @@ This section is the current entry point. The [learning contract](LEARNING_CONTRA
 | Operational incident | [Issue #2](https://github.com/rolo9/capability-lab/issues/2), including architecture-failure comment | OPEN. Clarifying documentation does not prove technical remediation |
 | Recording review | [Issue #1](https://github.com/rolo9/capability-lab/issues/1) | OPEN. HC08 recommends retaining dated records plus this entry point; no proficiency certification or scoring system |
 
-HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from that source revision. See [Current review](learning/2026-10-31-hc08-current-review.md) and the newer [replay preparation/status](learning/2026-10-31-hc08-replay-preparation.md). The Human ran the Docker verification on 2026-11-09, and HC08 confirmed the log. The comparison exercise ran on the Mac. The scope review below sets the next step. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
+HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from that source revision. See [Current review](learning/2026-10-31-hc08-current-review.md) and the newer [replay preparation/status](learning/2026-10-31-hc08-replay-preparation.md). The Human ran the Docker verification on 2026-11-09, and HC08 confirmed the log. The comparison exercise ran on the Mac. The learning roadmap below gives the current entry point. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
 
 ## Reproducibility: intended scope and present coverage
 
@@ -63,27 +63,9 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 
 ## Next sequence
 
-### 次の学習 — 決定木を足すと予測はどう変わるか
+[学習ロードマップ](ROADMAP.md)に、基礎からML、DL、Physical AIへのつながりと、手法・ライブラリ・分析対象の対応を記載している。再開点は、同じ数値予測を線形回帰と決定木がどう表すかの比較。XGBoostは勾配ブースティングの実装として、この地図に位置づける。
 
-2026-11-20のXGBoost実習はMacで実行結果を確認した。次は、最初の予測がどこで外れ、次の木が何を学んでどう補正するかを、既存実習の合成データでたどる。まず1件の予測を手で追い、1本目と2本目の役割が見えたところで、Notebookの学習処理につなげる。[実行結果と再開点](learning/2026-11-20-hc08-xgboost.md#学習の振り返りと再開点)
-
-### 次の優先 — 可視化（2026-11-19）
-
-成果を画面で確かめられる機会が少なく、Macを開ける頻度も進捗を制約している。次は手元の環境に関係なく、成果を見て理解し、改善点を判断できるところから進める。
-
-需要予測・SCMは合成データの題材として使う。今回身につけるのは、データを図に変え、系列の意味が伝わる表示を選び、同じ入力から図を再生成できる形にする力。
-
-1. **iPhoneで見る。** [既存Notebook](notebooks/inventory_analysis.ipynb) の合成データを使った静止画で、実績値と計算で作った系列を凡例・線種・注釈から区別できるかを見る。Macを使えるときは、そのまま図の生成に進める。
-2. **Macで図を再生成する。** Apple Silicon MacでDocker Desktopを起動し、既存の作業を保全したチェックアウトのルートで、Jupyterが停止中なら `make up`、続けて `make jupyter` を実行する。JupyterLabで `notebooks/inventory_analysis.ipynb` を開き、前段セルを含めて実行し、既存グラフを表示する。Humanが既存セルを実行して図を生成し、表示する系列を1つ変えて再実行する。図・実行手順・変更して分かったことをGitHubに残す。[起動・再現手順](docs/reproduce.md)
-3. **ブラウザ公開につなぐ。** 図と生成手順をGitHubから追える形で残し、ブラウザで見るために必要な最小の公開方法を判断する。公開Live Demoは、そのURLを別端末から開いて確認した時点で検証済みとする。
-
-**2026-11-19に可視化の実習を完了。** MacのJupyterLabで表示する系列を一つ変更し、再実行した図と手順を[学習記録](learning/2026-11-19-hc08-visualization.md)に保存した。次の実習はXGBoostを実行し、基準モデルと比較する。
-
-### 可視化の次に試す技術
-
-- **ML:** 小さな公開可能データでXGBoostを学習・実行し、同じ評価データで単純な基準モデルと比較する。実行コード・結果・評価条件をGitHubに残す。需要予測は題材の一つ。
-- **DL:** 小さなニューラルネットを動かし、学習と評価の結果を観察する。学習曲線と再現手順を残す。
-- **Physical AI:** シミュレーションで観測・判断・行動がつながる例を動かし、デモと再現手順を残す。具体的な題材と実機の必要性は、その段階で判断する。
+Macでの[可視化実習](learning/2026-11-19-hc08-visualization.md)と[XGBoost実行結果](learning/2026-11-20-hc08-xgboost.md)は、再現可能な記録として保存した。
 
 ### 最初のML実習 — XGBoost
 
@@ -105,16 +87,7 @@ docker exec capability-lab-jupyter sh -c 'python -m pip install --only-binary=:a
 
 SciPyと既存のNumPyを使うCPU実習なので、XGBoostのインストール時はLinux向けのGPU通信依存を省く。追加パッケージは起動中のコンテナに入る。コンテナを作り直したときはこのインストールを再実行する。
 
-JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb` を開いて **Run → Run All Cells** を選ぶ。評価値と図は実行の記録として残す。2026-11-20にMacのDocker/JupyterLabで両方の深さを確認し、[評価値・図・再現手順](learning/2026-11-20-hc08-xgboost.md)を記録した。
-
-### これまでの到達点
-
-1. **Runtime verification completed on 2026-11-09:** Docker build, three tests without a mount, and full Notebook execution in a new kernel passed at `90475af`.
-2. **Notebook comparison completed:** the Human executed and saved the July consumption-drop scenario. At a threshold of 80, MA(3) triggered in August and MA(6) in September. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
-3. **Record the result:** preserve observed output and understanding separately; fix any actual failures, then update this Current and reassess Issue #2 against its full acceptance conditions.
-4. **Exit condition:** repository instructions reproduce the unit within the stated scope, and the Human can explain the analytical meaning and Notebook/module/test relationship. The original Mac edits are available in the local Git stash.
-5. **Jupyter startup shortcut added:** `make up` starts the server and `make jupyter` opens the login URL. On the Mac, `make up` built and started the container and `make jupyter` completed without error. See the [replay procedure](docs/reproduce.md).
-6. **Re-anchor the next unit in Human Capability (2026-11-10):** SCM and demand forecasting supply synthetic examples. Set the transferable technical capability, what the Human will explain or modify and verify, and what evidence or artifact the unit will leave before assigning the next exercise. The recent MAE example exercised forecast-time information boundaries, but its delivery omitted this framing and a stopping criterion. Treat it as an observed Notebook exercise. See the [scope review](learning/2026-11-09-hc08-replay-verification.md#scope-review-2026-11-10).
+JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb` を開いて **Run → Run All Cells** を選ぶ。評価値と図は実行の記録として保存した。2026-11-20にMacのDocker/JupyterLabで両方の深さを確認し、[評価値・図・再現手順](learning/2026-11-20-hc08-xgboost.md)を記録した。
 
 ## Learning and operational history
 
@@ -123,7 +96,7 @@ JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb
 - [HC06 handoff](learning/2026-10-30-hc06-succession.md) and [HC07 handoff](learning/2026-10-31-hc07-succession.md): historical continuity and incident evidence.
 - [HC08 review](learning/2026-10-31-hc08-current-review.md): current clarification and scope decisions.
 - [HC08 replay preparation](learning/2026-10-31-hc08-replay-preparation.md): fresh Mac file observations, prepared implementation and pending execution checks.
-- [2026-11-09 verification](learning/2026-11-09-hc08-replay-verification.md): Mac integration, Docker build, three passing tests, and Notebook execution without a mount.
+- [2026-11-09 verification](learning/2026-11-09-hc08-replay-verification.md): Mac integration, Docker build, three passing tests, and Notebook execution without a mount. The [2026-11-10 scope review](learning/2026-11-09-hc08-replay-verification.md#scope-review-2026-11-10) records the earlier assessment of what the ML exercise should teach.
 - [Replay procedure](docs/reproduce.md): steps and verification coverage for the learning artifact.
 
 Keep explanations close to the notebook/code when they explain the experiment. Use dated notes for milestone reasoning and AI-owned operational continuity; link rather than duplicate detailed evidence. No record of AI-assisted execution alone establishes independent Human proficiency.

@@ -14,6 +14,8 @@ Notebook exploration → reusable `src/*.py` → tests → Git/GitHub → browse
 
 This is an artifact delivery path, not the whole curriculum. Connect each unit to the analytical question and the longer-term AI learning direction. A small reusable function can teach a useful boundary; endless function extraction or setup work that postpones substantive statistics/ML learning is a failure of curriculum judgment. Do not choose frameworks or Physical AI hardware before their need is concrete.
 
+The [learning roadmap](ROADMAP.md) defines the curriculum. Before asking the Human to code or run a library, explain the analytical question, the underlying idea, the method's relation to its peers, and what the library does. Then give the Human a concrete operation whose effect they can interpret.
+
 ## Reproducible learning experience
 
 The current scope, coverage, open gaps and next work are maintained in [README Current](README.md#current--hc08-2026-10-31), not in accumulating session instructions inside this contract.
