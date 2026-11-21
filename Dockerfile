@@ -11,6 +11,7 @@ ENV PYTHONPATH=/app
 # A fresh image includes the learning artifact, not only the old CSV script.
 COPY src/ src/
 COPY data/input.csv data/input.csv
+COPY data/sensor-temperature/ data/sensor-temperature/
 COPY notebooks/ notebooks/
 COPY tests/ tests/
 

@@ -76,6 +76,10 @@
 
 この単位では、学習に使う記録と評価に使う記録の違い、基準を置く理由を、一つの事例と結びつける。概念を押さえたら、線形回帰・k近傍法・決定木を、この流れの中で「データから何を使って予測するか」という観点で見比べる。必要な数学は手法とつないで確認する。
 
+現在の実習は[温度でセンサーのずれを予測できるか](learning/2026-11-21-sensor-temperature-regression.md)。単回帰と平均基準を、学習に使わなかった別の日の記録で比較する。
+
+主に参照する公開教材は、[Harvard Stat 110](https://stat110.hsites.harvard.edu/)と[MIT 18.650](https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/)で確率・統計、[Stanford STATS 202](https://web.stanford.edu/class/stats202/)と[ISLP Python版](https://www.statlearning.com/)で統計的機械学習、[Stanford CS231n（2026年春）](https://cs231n.stanford.edu/2026/schedule.html)で深層学習。ロボティクスの力学・状態推定・制御を並行する枝として置き、[MIT Robotic Manipulation（2026年秋）](https://manipulation.csail.mit.edu/Fall2026/)で知覚・計画・制御と学習をつなぐ。[Stanford CS224R（2026年春）](https://cs224r.stanford.edu/)は模倣学習・強化学習の段階で使う。
+
 ### 以前の実習に戻る条件
 
 前回の線形回帰と決定木の比較、およびXGBoost実習の続きは保留。手法を共通の問い・基準・評価データで比較する意味が見えたときに、過去の結果を読み直し、木の深さを変えた効果を位置づける。[可視化の記録](learning/2026-11-19-hc08-visualization.md) · [XGBoostの記録](learning/2026-11-20-hc08-xgboost.md)

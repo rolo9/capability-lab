@@ -7,6 +7,7 @@
 | 移動平均・Rolling average | 出荷と消費の合成時系列で、何を平均するかによって指標の意味が変わることを確認 | [問いと考察](2026-10-30-time-series-and-reproducibility.md) · [Notebook](../notebooks/inventory_analysis.ipynb) |
 | 可視化・Matplotlib | 図に使う列を消費から卸在庫に替えて再描画し、列と凡例がそれぞれ何を決めるかを確認 | [実際の図と再現手順](2026-11-19-hc08-visualization.md) · [Notebook](../notebooks/inventory_analysis.ipynb) |
 | 決定木の深さ・XGBoost・勾配ブースティング | 合成スコアの予測で深さ1と3を実行し、同じ評価データの誤差を比較。実習の続きは保留。再開条件は[ロードマップ](../ROADMAP.md#以前の実習に戻る条件)へ | [実行結果、図、振り返り](2026-11-20-hc08-xgboost.md) · [Notebook](../notebooks/xgboost_first_run.ipynb) |
+| 単回帰・線形回帰・最小二乗・ベースライン | 温度によるセンサーのずれを平均基準と比較する実習 | [復習の問いと実習](2026-11-21-sensor-temperature-regression.md) |
 | k近傍法・KNN・k-nearest neighbors | 入力が似ている過去の事例から予測する手法。この取り組みでの実習記録はこれから | [ロードマップ上の位置づけ](../ROADMAP.md#決定木の横にあるml手法) |
 
 ## 実習の区切りで残すこと
