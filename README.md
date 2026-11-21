@@ -91,6 +91,8 @@ JupyterLabのファイル一覧を更新し、`notebooks/xgboost_first_run.ipynb
 
 ## Learning and operational history
 
+**手法名から復習する**場合は、[学習記録の索引](learning/README.md)へ。関連する実習、図、Notebook、そこで分かったことをたどれる。
+
 - [Cycle 1](learning/cycle-01.md): systems, storage/runtime boundaries and recovery experiments. Historical checkpoints are not today's task list.
 - [2026-10-30 learning record](learning/2026-10-30-time-series-and-reproducibility.md): time series, indicator limitations, dependency and Git practice.
 - [HC06 handoff](learning/2026-10-30-hc06-succession.md) and [HC07 handoff](learning/2026-10-31-hc07-succession.md): historical continuity and incident evidence.
