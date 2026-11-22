@@ -82,7 +82,7 @@
 
 [平均と線形回帰](learning/2026-11-21-mean-vs-linear.md)で基準モデルと入力を使うモデルを比べた。[直線と2次式](learning/2026-11-21-linear-vs-quadratic.md)は工程3〜4の探索。85馬力は誤差の内訳を見る区切りで、採用条件の根拠はない。1980年型以降の85台はすでに比較に使ったので、同じ実習で候補を決めた後の独立した最終テストには使えない。
 
-次は工程1〜2に戻る。利用場面と合格条件を明確にし、その用途を評価できる未使用データを確保する設計を先に作る。そのうえで、基準モデルを置き、誤差の診断から特徴量を増やすか手法を変えるかを選び、最終確認まで一周する。決定木などの手法は、この一周の中で比較する理由があるときに扱う。
+[試験に回す10台を選ぶ実習](learning/2026-11-22-auto-ranking.md)では、用途を先に決め、同じ85台で馬力の直線と2次式を比較した。2次式でMAEは下がったが選抜結果が同じだったので、次は同じ条件で車重を1列加え、馬力順の基準を上回るか、見逃しがどう入れ替わるかを見る。ここは工程3〜4。採用に向けた工程5には、事前に決めた合格条件と用途を代表する未使用データが必要。決定木などは、この流れで比較する理由があるときに扱う。
 
 主に参照する公開教材は、[Harvard Stat 110](https://stat110.hsites.harvard.edu/)と[MIT 18.650](https://ocw.mit.edu/courses/18-650-statistics-for-applications-fall-2016/)で確率・統計、[Stanford STATS 202](https://web.stanford.edu/class/stats202/)と[ISLP Python版](https://www.statlearning.com/)で統計的機械学習、[Stanford CS231n（2026年春）](https://cs231n.stanford.edu/2026/schedule.html)で深層学習。ロボティクスの力学・状態推定・制御を並行する枝として置き、[MIT Robotic Manipulation（2026年秋）](https://manipulation.csail.mit.edu/Fall2026/)で知覚・計画・制御と学習をつなぐ。[Stanford CS224R（2026年春）](https://cs224r.stanford.edu/)は模倣学習・強化学習の段階で使う。
 
