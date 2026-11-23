@@ -14,6 +14,64 @@
 
 線形回帰は馬力の列を使い、2次回帰は同じ馬力から作った馬力の2乗を列に加える。どちらも学習データの残差平方和を小さくする係数を求める。コードでは `PolynomialFeatures` が列を作り、`LinearRegression.fit` が係数を求める。その後、`predict` の出力を並べ替えて試験の対象を決める。 [ISLP第3章の非線形変換](https://islp.readthedocs.io/en/stable/labs/Ch3-linreg-lab.html#non-linear-transformations-of-the-predictors)
 
+## CSVから比較表までをたどる
+
+ここでは「10台の試験枠でより多く拾えるか」を、馬力だけの線形回帰と、馬力に車重を足した線形回帰で確かめる。固定版の `Auto.csv` と同じ場所で、以下の4ブロックを順に実行する。pandas 2.2.3、scikit-learn 1.8.0で実行確認した。
+
+### 1. ライブラリを読み込み、表を確認する
+
+`import` で使う道具を読み込み、`read_csv` で実際のデータをDataFrame（行と列のある表）にする。元データは392行×9列で、1行が車1台分。最初の3行で列の意味を確認する。`groupby("year").size()` は年式が同じ行をまとめて台数を数える。1980〜82年型は27、28、30台で計85台。これは分割の内訳を確認する集計で、車ごとのデータを年平均に置き換える操作ではない。
+
+```python
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+cars = pd.read_csv("Auto.csv")
+print(cars.shape)
+print(cars[["year", "horsepower", "weight", "mpg"]].head(3))
+print(cars.groupby("year").size().loc[80:82])
+```
+
+### 2. 行を分け、モデルに渡す列を取り出す
+
+`loc` で年式を条件に行を抽出し、過去年型307台を学習用、比較用85台を別の表にする。`train[columns]` は馬力と車重の2列（307×2）、`train["mpg"]` は正解の燃費1列（307件）。比較側の入力は同じ2列（85×2）。`mpg` は比較側の表にも残すが、予測関数への入力には入れず、答え合わせで使う。
+
+```python
+train = cars.loc[cars["year"] < 80]
+dev = cars.loc[cars["year"] >= 80].copy()
+columns = ["horsepower", "weight"]
+X_train = train[columns]
+y_train = train["mpg"]
+X_dev = dev[columns]
+print(X_train.shape, y_train.shape, X_dev.shape)
+```
+
+### 3. 学習し、予測値を表に戻す
+
+`fit(X, y)` は過去の入力と実測燃費を渡して係数を決める処理。`predict(X_dev)` は係数を固定し、比較する車ごとに予測値を1つ返す。どちらのモデルも同じ307台と同じ正解を使い、入力の列だけを変えた。返った値を85台の元の行順で2列に追加する。たとえば実測17.6 mpgの車の予測は、馬力だけで約24.45、車重ありで約19.93 mpgだった。
+
+```python
+horsepower_only = ["horsepower"]
+line = LinearRegression().fit(train[horsepower_only], y_train)
+with_weight = LinearRegression().fit(X_train, y_train)
+dev["pred_hp"] = line.predict(dev[horsepower_only])
+dev["pred_hp_weight"] = with_weight.predict(X_dev)
+print(dev.loc[dev["mpg"].idxmin(),
+              ["horsepower", "weight", "mpg", "pred_hp", "pred_hp_weight"]].round(2))
+```
+
+### 4. 同じ10枠で比較する
+
+`nsmallest(10, "mpg")` は実測が悪い10台を取り出す。予測列でも同じ処理をして試験に回す10台を選ぶ。値が同じときは先に出た行を優先する。元の行番号（DataFrameのインデックス）で共通する車を数えると、両方とも5/10。1台の予測が実測に近づいたことと、10枠全体で拾える台数が増えることは別々に確かめられる。
+
+```python
+actual_worst = dev.nsmallest(10, "mpg")
+for column in ["pred_hp", "pred_hp_weight"]:
+    picked = dev.nsmallest(10, column)
+    hits = picked.index.intersection(actual_worst.index)
+    print(column, len(hits), "/", len(picked))
+```
+
 ## 実行で確認した事実
 
 [固定版Auto.csv](https://github.com/intro-stat-learning/ISLP/blob/46fb7dfaa39a41c007c627cc6a90dba3a88e5b2c/ISLP/data/Auto.csv)を使用。 [出典と利用形態](2026-11-21-mean-vs-linear.md#公開データの出典と利用形態)。[前回](./2026-11-21-linear-vs-quadratic.md)と同じく1979年型以前307台で学習し、結果を見たことのある1980年型以降85台で開発中の診断を行った。学習・評価データ、入力の馬力、試験枠を固定し、馬力の2乗を加えるかだけを変えた。
