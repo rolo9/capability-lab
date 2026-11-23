@@ -77,6 +77,82 @@ print("Target ranks:", [rank for rank, i in enumerate(priority, 1) if i in targe
 
 </details>
 
+## 車重を加えて10枠で見逃しが減るか
+
+10枠が固定され、車重は試験前に分かると仮定した。前回の見逃しに馬力が低めで重い車が含まれていたので、「馬力に車重を足すと、その車たちを拾い、10枠全体でも改善する」と仮説を立てた。1979年型以前307台で係数を求め、すでに結果を見た1980年型以降85台で比較。基準は馬力順で、前回の馬力だけの線形回帰と同じ10台を選ぶ。対象・試験枠・実測燃費が悪い10台という定義は前回と共通。順位の同点はCSVの行順で決めた。
+
+### 計算と出力
+
+線形回帰に車重を1列足すと、燃費の予測は「基準の燃費＋馬力の寄与＋車重の寄与」になる。最小二乗法で2つの係数を同時に学び、推定mpgが低い順に10台を選ぶ。実行した式では、馬力が同じ場合、車重1,000 lb増に対し予測値が約5.38 mpg下がった。これはモデル上の差であり、車重を操作したときの因果効果を測った値ではない。scikit-learnでは、馬力と車重の2列を `X_train` にすると `LinearRegression().fit(X_train, y_train)` がこの当てはめを担う。実行したのは標準Python版。
+
+| 選び方 | 拾えた台数 | 見逃し |
+| --- | ---: | ---: |
+| 馬力順 | 5 | 5 |
+| 馬力＋車重の線形回帰 | 5 | 5 |
+
+選抜した6台が入れ替わり、実測燃費が悪い車を3台拾い直した一方、馬力順で拾っていた別の3台を落とした。たとえば85 hp、3,465 lb、17.6 mpgの車を拾ったが、112 hp、2,835 lb、22.0 mpgの車を落とした。判定対象を10台全体で見た結果、拾った台数は同じだった。
+
+### 判断
+
+今回の指標では馬力順を上回る根拠が得られず、車重を使う候補はこの段階で採用保留。次の設計上の論点は、見逃しを一律に数えるのか、特に悪い車の見逃しに重みを付けるのか。用途の側で決める。基準や候補を固めた後の確認には、別の未使用データが必要。今回の85台は開発中の診断に使用した。
+
+<details>
+<summary>Macで実行したPythonコード</summary>
+
+Apple Silicon Mac、Python 3.9.6の標準ライブラリのみで実行。固定版CSVを取得し、下記を `weight.py` として保存して `python3 weight.py Auto.csv` を実行する。
+
+```python
+import csv
+from statistics import mean
+from sys import argv
+
+with open(argv[1], newline="", encoding="utf-8") as file:
+    cars = list(csv.DictReader(file))
+
+train = [car for car in cars if int(car["year"]) < 80]
+dev = [car for car in cars if int(car["year"]) >= 80]
+target = set(sorted(range(len(dev)), key=lambda i: float(dev[i]["mpg"]))[:10])
+
+# 係数の単位を100 hp、1000 lbにする。平均は学習用データだけで求める。
+hp = [float(car["horsepower"]) / 100 for car in train]
+weight = [float(car["weight"]) / 1000 for car in train]
+mpg = [float(car["mpg"]) for car in train]
+hp_mean, weight_mean, mpg_mean = mean(hp), mean(weight), mean(mpg)
+x = [v - hp_mean for v in hp]
+z = [v - weight_mean for v in weight]
+y = [v - mpg_mean for v in mpg]
+
+def dot(a, b):
+    return sum(left * right for left, right in zip(a, b))
+
+xx, xz, zz = dot(x, x), dot(x, z), dot(z, z)
+xy, zy = dot(x, y), dot(z, y)
+# 最小二乗の連立方程式を解く。
+det = xx * zz - xz ** 2
+hp_coef = (xy * zz - zy * xz) / det
+weight_coef = (zy * xx - xy * xz) / det
+
+def predict(car):
+    return (mpg_mean
+            + hp_coef * (float(car["horsepower"]) / 100 - hp_mean)
+            + weight_coef * (float(car["weight"]) / 1000 - weight_mean))
+
+indices = range(len(dev))
+baseline = set(sorted(indices, key=lambda i: -int(dev[i]["horsepower"]))[:10])
+candidate = set(sorted(indices, key=lambda i: predict(dev[i]))[:10])
+print("train, development:", len(train), len(dev))
+print("coefficients:", hp_coef, weight_coef)
+print("hits:", len(baseline & target), len(candidate & target))
+for label, subset in [
+    ("added", candidate - baseline), ("removed", baseline - candidate),
+    ("missed", target - candidate),
+]:
+    print(label, [(dev[i]["horsepower"], dev[i]["weight"], dev[i]["mpg"],
+                   round(predict(dev[i]), 2), i in target) for i in sorted(subset)])
+```
+
+</details>
+
 ## 本人の予想と解釈
 
 - 実行前の予想：
