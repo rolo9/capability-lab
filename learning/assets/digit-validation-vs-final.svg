@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 260">
+<title>手書き数字8の検出率と誤検出率</title>
+<rect width="500" height="260" fill="white"/>
+<g font-family="sans-serif" font-size="13" fill="#17283d">
+<text x="14" y="28" font-weight="bold">8を拾った割合（80%以上）</text>
+<text x="14" y="56">Validation</text>
+<rect x="115" y="43" width="320.0" height="16" fill="#edf1f4"/>
+<rect x="115" y="43" width="256.00" height="16" fill="#52758e"/>
+<text x="447.0" y="56">80.0%</text>
+<text x="14" y="84">Final test</text>
+<rect x="115" y="71" width="320.0" height="16" fill="#edf1f4"/>
+<rect x="115" y="71" width="265.14" height="16" fill="#166b59"/>
+<text x="447.0" y="84">82.9%</text>
+<path d="M371.0 40v48" stroke="#902e15" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="14" y="152" font-weight="bold">8以外を誤って回した割合（10%以下）</text>
+<text x="14" y="180">Validation</text>
+<rect x="115" y="167" width="320.0" height="16" fill="#edf1f4"/>
+<rect x="115" y="167" width="23.70" height="16" fill="#52758e"/>
+<text x="447.0" y="180">7.4%</text>
+<text x="14" y="208">Final test</text>
+<rect x="115" y="195" width="320.0" height="16" fill="#edf1f4"/>
+<rect x="115" y="195" width="35.99" height="16" fill="#166b59"/>
+<text x="447.0" y="208">11.2%</text>
+<path d="M147.0 164v48" stroke="#902e15" stroke-width="2" stroke-dasharray="4 3"/>
+<text x="14" y="250">破線：事前の判定条件　｜　棒の横幅：0〜100%</text></g></svg>

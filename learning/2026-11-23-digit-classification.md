@@ -83,6 +83,72 @@ print("review queue:", sum(sent))
 
 Macで実行すると、行は実際の8以外・8の順、列は回さない・回すの順で `[[300, 24], [7, 28]]`。実際の8の行だけを見れば、28/(7+28)=80%を拾った。8以外の行だけなら、24/(300+24)=7.4%を誤送した。人が確認する総件数は「回す」列の24+28=52枚。再現率80%以上と誤検出率10%以下に照らすと比較用では両方に届いた。取り置いた364枚は、このコードでも判定に使っていない。
 
+## 取り置いた画像での最終テスト
+
+目的は、比較用画像で条件を満たした方法が、新しい画像にも通用するかを確かめること。学習データから作った平均画像としきい値（表示上37.49）を固定し、同じ集計関数に比較用 `valid` と最終テスト用 `final` を順に渡した。
+
+| 項目 | 比較用359枚 | 最終テスト364枚 | 事前条件 |
+| --- | ---: | ---: | --- |
+| 本物の8を拾った割合 | 28/35（80.0%） | 29/35（82.9%） | 80%以上 |
+| 8以外を誤って回した割合 | 24/324（7.4%） | 37/329（11.2%） | 10%以下 |
+| 人に回した件数 | 52 | 66 | — |
+
+![両データでの検出率・誤検出率と事前条件の比較](assets/digit-validation-vs-final.svg)
+
+最終テストは誤検出率が条件を超えたため**採用保留**。329枚の8以外に対し許容できたのは32枚までで、実際は37枚。ここでしきい値を上げれば誤検出は減り得るが、見逃しも増え得る。この364枚を見て調整すれば、その調整後の独立した確認には新しいテストが必要になる。今回の数字は画像単位で分けた範囲での評価。
+
+### 集計と描画のコード
+
+末尾の「実行したPythonコード」に以下を追加する。 `evaluate(rows)` は正解と判定を照合して `TP, FN, FP, TN` を返す。描画では件数から割合を計算し、棒の幅に変換する。破線の位置は事前の条件（80%と10%）から決める。Macの標準Python 3.9.6で再実行し、SVGがXMLとして読み込めることを確認した。
+
+<details>
+<summary>集計コードとSVGの描画コード</summary>
+
+```python
+from collections import Counter
+
+def evaluate(rows):
+    # 各画像について (実際に8か, 確認に回すか) の組を数える。
+    counts = Counter(
+        (row[-1] == 8, score(row[:-1]) > threshold) for row in rows
+    )
+    tp, fn = counts[True, True], counts[True, False]
+    fp, tn = counts[False, True], counts[False, False]
+    return tp, fn, fp, tn
+
+results = {"Validation": evaluate(valid), "Final test": evaluate(final)}
+for name, counts in results.items():
+    print(name, counts)
+
+from pathlib import Path
+
+# 横幅は0〜100%。棒は実測値、縦線は事前に決めた条件。
+left, scale = 115, 3.2
+chart = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 260">',
+         '<title>手書き数字8の検出率と誤検出率</title>',
+         '<rect width="500" height="260" fill="white"/>',
+         '<g font-family="sans-serif" font-size="13" fill="#17283d">']
+for top, title, limit, index in [
+    (28, "8を拾った割合（80%以上）", 80, 0),
+    (152, "8以外を誤って回した割合（10%以下）", 10, 1),
+]:
+    chart.append(f'<text x="14" y="{top}" font-weight="bold">{title}</text>')
+    for i, (name, (tp, fn, fp, tn)) in enumerate(results.items()):
+        value = 100 * (tp / (tp + fn), fp / (fp + tn))[index]
+        y = top + 15 + i * 28
+        color = ("#52758e", "#166b59")[i]
+        chart.append(f'<text x="14" y="{y + 13}">{name}</text>')
+        chart.append(f'<rect x="{left}" y="{y}" width="{100 * scale}" height="16" fill="#edf1f4"/>')
+        chart.append(f'<rect x="{left}" y="{y}" width="{value * scale:.2f}" height="16" fill="{color}"/>')
+        chart.append(f'<text x="{left + 100 * scale + 12}" y="{y + 13}">{value:.1f}%</text>')
+    x = left + limit * scale
+    chart.append(f'<path d="M{x} {top + 12}v48" stroke="#902e15" stroke-width="2" stroke-dasharray="4 3"/>')
+chart.append('<text x="14" y="250">破線：事前の判定条件　｜　棒の横幅：0〜100%</text></g></svg>')
+Path("digit-validation-vs-final.svg").write_text("\n".join(chart), encoding="utf-8")
+```
+
+</details>
+
 ## 本人の予想と解釈
 
 - 実行前の予想：
