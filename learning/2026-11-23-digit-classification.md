@@ -58,6 +58,31 @@
 
 何も回さない場合でも、全体正解率は324/359（90.3%）。平均画像方式は再現率28/35（80.0%）、誤検出率24/324（7.4%）で、比較用データでは両条件を満たした。人に回る画像は52枚で、うち24枚は8以外。次は学習で決まった方式と境界を固定して、今回スコアを計算しなかった364枚でも両条件を満たすか一度確認する。
 
+## 正解と判定から混同行列を作る
+
+手計算の4マスをPythonで数える。下のコードは末尾の「実行したPythonコード」の後に続けて実行する。
+
+1. 元データは1行が画像1枚。先に分けた比較用 `valid` は359行。 `row[-1]` で最後の列（正解の数字）、`row[:-1]` でそれより前の64個（画像の入力）を取る。
+2. `actual` は「実際に8か」、`sent` は「画像だけで計算した点数がしきい値を超え、確認に回したか」。どちらも359件で同じ行順。`zip` で同じ画像の正解と判定をペアにする。
+3. `cell` は手計算の表を辞書にしたもの。たとえば `(True, False)` は本物の8を回さなかったのでFN。 `Counter` が各マスの出現回数を数える。
+
+```python
+from collections import Counter
+
+cell = {(True, True): "TP", (True, False): "FN",
+        (False, True): "FP", (False, False): "TN"}
+actual = [row[-1] == 8 for row in valid]
+sent = [score(row[:-1]) > threshold for row in valid]
+counts = Counter(cell[truth, decision] for truth, decision in zip(actual, sent))
+print("shapes:", len(actual), len(sent))
+print("matrix:", [[counts["TN"], counts["FP"]], [counts["FN"], counts["TP"]]])
+print("recall:", counts["TP"] / sum(actual))
+print("false positive rate:", counts["FP"] / (len(actual) - sum(actual)))
+print("review queue:", sum(sent))
+```
+
+Macで実行すると、行は実際の8以外・8の順、列は回さない・回すの順で `[[300, 24], [7, 28]]`。実際の8の行だけを見れば、28/(7+28)=80%を拾った。8以外の行だけなら、24/(300+24)=7.4%を誤送した。人が確認する総件数は「回す」列の24+28=52枚。再現率80%以上と誤検出率10%以下に照らすと比較用では両方に届いた。取り置いた364枚は、このコードでも判定に使っていない。
+
 ## 本人の予想と解釈
 
 - 実行前の予想：
