@@ -9,6 +9,7 @@
 | 最小二乗法・OLS・残差 | [何を最小にするか](2026-11-22-auto-ranking.md#最小二乗法) | [CSVから比較表まで](2026-11-22-auto-ranking.md#csvから比較表までをたどる) |
 | 混同行列・TP・FP・FN・TN・再現率 | [4つのマスで何を数えるか](2026-11-23-digit-classification.md#分類の基礎--混同行列) | [手書き数字の評価結果](2026-11-23-digit-classification.md#実行で確認した事実) |
 | 学習データ・検証データ・テストデータ・データ分割 | [3つの役割と分け方](2026-11-23-digit-classification.md#学習検証最終テストの分け方) | [画像の分割と比較](2026-11-23-digit-classification.md#実行で確認した事実) |
+| 決定木・CART・ジニ不純度 | [どの境界で分けるか](2026-11-24-decision-tree-first-split.md#概念と計算) | [6件の計算・木の図・Python](2026-11-24-decision-tree-first-split.md#6件から分岐を作る) |
 
 iPhoneで思い出したいときは、まず概念のリンクを開く。式や表を読む前に一言で意味を思い出し、必要なら実習のリンクから具体例とコードをたどる。
 
