@@ -20,7 +20,11 @@ As the artifact develops, progress toward statistics, prediction/ML, and model e
 
 Choose Web UI/framework/hosting when browser interactions and runtime requirements are concrete. The Notebook and eventual UI should reuse analytical logic rather than maintain independent copies.
 
-## Current — HC08, 2026-10-31
+## Current — HC08 → HC09, 2026-11-25
+
+**学習進行は保留中。** [HC08 → HC09の引き継ぎ](learning/2026-11-25-hc08-succession.md)に、保留の経緯、再利用できる成果物、HC09の初動を記録した。[旧ロードマップ](ROADMAP.md)は再検討用に保存している。
+
+### HC08の実装・検証記録
 
 This section is the current entry point. The [learning contract](LEARNING_CONTRACT.md) defines collaboration; executable files establish what is actually implemented. Dated notes are historical evidence and context, not competing next-step instructions.
 
@@ -34,7 +38,7 @@ This section is the current entry point. The [learning contract](LEARNING_CONTRA
 | Operational incident | [Issue #2](https://github.com/rolo9/capability-lab/issues/2), including architecture-failure comment | OPEN. Clarifying documentation does not prove technical remediation |
 | Recording review | [Issue #1](https://github.com/rolo9/capability-lab/issues/1) | OPEN. HC08 recommends retaining dated records plus this entry point; no proficiency certification or scoring system |
 
-HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from that source revision. See [Current review](learning/2026-10-31-hc08-current-review.md) and the newer [replay preparation/status](learning/2026-10-31-hc08-replay-preparation.md). The Human ran the Docker verification on 2026-11-09, and HC08 confirmed the log. The comparison exercise ran on the Mac. The learning roadmap below gives the current entry point. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
+HC08 first clarified Current in `4ce99f3`, then prepared the replay unit from that source revision. See [Current review](learning/2026-10-31-hc08-current-review.md) and the newer [replay preparation/status](learning/2026-10-31-hc08-replay-preparation.md). The Human ran the Docker verification on 2026-11-09, and HC08 confirmed the log. The comparison exercise ran on the Mac. See the [verification record](learning/2026-11-09-hc08-replay-verification.md).
 
 ## Reproducibility: intended scope and present coverage
 
@@ -61,13 +65,13 @@ The [replay instructions](docs/reproduce.md) define two complementary workflows.
 
 HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=/app`, and kernel working directory `/app/notebooks`, preserving the existing CSV relative path. The existing Dockerfile was expanded to include the required files for mount-free checks; no second Dockerfile or Compose layer was added. The checks without a mount passed on the Mac. The Human opened JupyterLab using this development mount and saved the Notebook after the module-reuse cell produced output. See the replay instructions for the rationale and exact commands.
 
-## Next sequence
+## 学習資料（HC08の記録）
 
-[学習ロードマップ](ROADMAP.md)に、基礎からML、DL、Physical AIへのつながりと、手法・ライブラリ・分析対象の対応を記載している。入口は、過去の記録から新しい1件を予測し、結果を評価する流れ。線形回帰と決定木の比較およびXGBoost実習の続きは、この土台を押さえてから再開する。
+[学習記録の索引](learning/README.md)から教材と実習結果に戻れる。カリキュラムの再検討は[HC08 → HC09の引き継ぎ](learning/2026-11-25-hc08-succession.md)を参照する。
 
 Macでの[可視化実習](learning/2026-11-19-hc08-visualization.md)と[XGBoost実行結果](learning/2026-11-20-hc08-xgboost.md)は、再現可能な記録として保存した。
 
-### 最初のML実習 — XGBoost
+### 過去のML実習 — XGBoost
 
 [実習Notebook](notebooks/xgboost_first_run.ipynb)では、2つの測定値から合成スコアを予測する。評価用120行について、学習データの平均を返す基準モデルとXGBoostのMAEと散布図を比べる。最初は `max_depth = 3`、次は `1` で再実行する。
 
