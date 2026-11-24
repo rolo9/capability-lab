@@ -10,6 +10,18 @@
 
 ジニ不純度は、グループ内で正解がどの程度混ざっているかを表す。クラス1の割合を $p$ とすると $G=1-p^2-(1-p)^2$。全件が同じクラスなら0、半々なら0.5。分岐後は子グループの件数で重みを付けて平均し、それが最も小さい境界を選ぶ。これは学習時に分岐を選ぶ尺度。未知の例での見逃しや誤検出は、別のデータで混同行列を作って調べる。 [分類評価の復習](2026-11-23-digit-classification.md#分類の基礎--混同行列)
 
+### 専門資料で使う用語
+
+| 日本語 | 英語 | 意味 |
+| --- | --- | --- |
+| 決定木 | decision tree | 分岐をたどって予測するモデル |
+| 根ノード（ルートノード） | root node | サンプルが最初に入るノード |
+| 内部ノード | internal node | 特徴量の値などを条件に、次に進む枝を選ぶノード |
+| 葉ノード（終端ノード） | leaf node / terminal node | 分岐が終わり、予測値を返すノード |
+| 深さ | depth | 根から数えた分岐の段数。根の深さは0 |
+
+[scikit-learnの決定木構造の解説](https://scikit-learn.org/stable/auto_examples/tree/plot_unveil_tree_structure.html) · [情報処理学会の研究報告](https://kansai.ipsj.or.jp/record/pdf/2019/D-103.pdf)
+
 ## 6件から分岐を作る
 
 説明用に作った6件。入力は $x$、0と1は教師データの正解。隣り合う入力値の中点を候補にすれば、6件を分ける異なる位置を調べられる。
@@ -129,4 +141,79 @@ for depth in (1, 3, 6, None):
     for X, y in [(X_train, y_train), (X_valid, y_valid)]:
         tn, fp, fn, tp = confusion_matrix(y, model.predict(X), labels=[False, True]).ravel()
         print(tn, fp, fn, tp, round(tp/(tp+fn)*100,1), round(fp/(fp+tn)*100,1))
+```
+
+## 決定木を固定して判定しきい値を変える
+
+学習の問いは、モデルを作り直さずに、見逃しと誤検出のバランスを調整できるか。今回の題材では深さ6を固定し、検証359枚で再現率80%以上（35枚中28枚以上）と誤検出率10%以下（324枚中32枚以下）を同時に満たす点を探す。前回の最終テストは使わない。
+
+**分岐のしきい値**（split threshold）は特徴量の値で進む枝を決める。**判定しきい値**（decision threshold）は、葉ノードで得た陽性クラスの推定値がいくつ以上なら確認に回すかを決める。重みなしのこの木では、陽性の推定値は葉ノードに入った学習例のうち「8」だった割合。葉が同じなら同じ点数になるため、同点の画像は一緒に判定が変わる。
+
+| 判定しきい値（表示は丸め） | 誤検出（最大32） | 8を拾った枚数（最低28） |
+| --- | ---: | ---: |
+| 約0.9444 | 3 | 24 |
+| 0.5以上 | 4 | 24 |
+| 0.2 | 13 | 25 |
+| 約0.0444 | 36 | 27 |
+| 約0.0092 | 112 | 32 |
+
+ここでの規則はスコアが境界以上。前回の `predict` ではクラスが同点の場合は陰性になるため、表の「0.5以上」の誤検出4件と前回の3件には1件の差がある。
+
+![ROC曲線。左上の条件に達する点がない](assets/tree-threshold.svg)
+
+ROC曲線は、横軸に誤検出率、縦軸に真陽性率（この例での再現率）を置く。図は判断に関係する誤検出率0〜30%付近を拡大。観測されたしきい値をすべて計算した結果、両条件を満たす点はなかった。見逃しを減らす方法として、しきい値の調整は学べた。一方、採用までの流れを学ぶ題材として、今回の木とデータの組み合わせはここで区切る。次の事例は、基準と候補の差が見え、別に取り置いたデータで採用を判断できるよう設計する。条件は比較前に固定する。
+
+### 集計と描画のPython
+
+学習・検証の分割は前節と同じ。`predict_proba` の陽性クラス列を使い、`roc_curve` に正解とスコアを渡す。点の横と縦が誤検出率と再現率。破線は事前条件。以下はクラウド環境で実行した。固定版gzipのパスを引数に指定する。
+
+```python
+import csv
+import gzip
+import random
+from statistics import mean
+from sys import argv
+
+with gzip.open(argv[1], "rt", newline="") as file:
+    rows = [list(map(int, row)) for row in csv.reader(file)]
+
+# 各数字を別々に混ぜ、60/20/20に分ける。
+rng = random.Random(8)
+train, valid, final = [], [], []
+for digit in range(10):
+    group = [row for row in rows if row[-1] == digit]
+    rng.shuffle(group)
+    n = len(group)
+    train.extend(group[:3*n//5])
+    valid.extend(group[3*n//5:4*n//5])
+    final.extend(group[4*n//5:])
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import confusion_matrix
+
+X_train = [row[:-1] for row in train]
+y_train = [row[-1] == 8 for row in train]
+X_valid = [row[:-1] for row in valid]
+y_valid = [row[-1] == 8 for row in valid]
+
+from sklearn.metrics import roc_curve
+import matplotlib.pyplot as plt
+
+model = DecisionTreeClassifier(max_depth=6, random_state=8)
+model.fit(X_train, y_train)
+scores = model.predict_proba(X_valid)[:, 1]
+fpr, tpr, thresholds = roc_curve(y_valid, scores, drop_intermediate=False)
+
+for f, t, cut in zip(fpr, tpr, thresholds):
+    print(round(cut, 4), round(f*324), round(t*35))
+
+fig, ax = plt.subplots(figsize=(6, 4))
+ax.step(fpr * 100, tpr * 100, where="post", label="Depth 6")
+ax.scatter(fpr * 100, tpr * 100, s=14)
+ax.axvline(10, linestyle="--", color="grey")
+ax.axhline(80, linestyle="--", color="grey")
+ax.set(xlabel="False positive rate (%)", ylabel="Recall (%)",
+       xlim=(-1, 30), ylim=(0, 102), title="Validation: fixed tree, varying threshold")
+ax.legend()
+fig.savefig("tree-threshold.svg", bbox_inches="tight", metadata={"Date": None})
 ```
