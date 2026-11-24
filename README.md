@@ -20,9 +20,14 @@ As the artifact develops, progress toward statistics, prediction/ML, and model e
 
 Choose Web UI/framework/hosting when browser interactions and runtime requirements are concrete. The Notebook and eventual UI should reuse analytical logic rather than maintain independent copies.
 
-## Current — HC08 → HC09, 2026-11-25
+## Current — HC09, 2026-11-25
 
-**学習進行は保留中。** [HC08 → HC09の引き継ぎ](learning/2026-11-25-hc08-succession.md)に、保留の経緯、再利用できる成果物、HC09の初動を記録した。[旧ロードマップ](ROADMAP.md)は再検討用に保存している。
+**二本柱の学習設計を確定。教材制作・実習の着手前。**
+
+- **技術選択と実践**では、Dockerの経験から「何をどこで動かし、どう再実行するか」を学ぶ。最初の候補は、Notebookの実行場所と保存先を説明する単元。
+- **統計・AIの基礎**では、データの観測とばらつきから、評価、機械学習、深層学習、Physical AIへつなぐ。最初の候補は、表の1行と平均で何を読めるかを確かめる単元。
+
+学習順、各単元の構成、ランタイム切替を検討する地点は[現行ロードマップ](ROADMAP.md)を参照。既存教材は[学習索引](learning/README.md)にある。設計を見直した経緯は[HC08 → HC09の引き継ぎ](learning/2026-11-25-hc08-succession.md)と[旧ロードマップ](https://github.com/rolo9/capability-lab/blob/13a4b3229de24843b1ee11275389912f16489a13/ROADMAP.md)に残している。
 
 ### HC08の実装・検証記録
 
@@ -67,7 +72,7 @@ HC08 selected a whole-project development mount at `/app`, explicit `PYTHONPATH=
 
 ## 学習資料（HC08の記録）
 
-[学習記録の索引](learning/README.md)から教材と実習結果に戻れる。カリキュラムの再検討は[HC08 → HC09の引き継ぎ](learning/2026-11-25-hc08-succession.md)を参照する。
+[学習記録の索引](learning/README.md)から教材と実習結果に戻れる。再設計の経緯は[HC08 → HC09の引き継ぎ](learning/2026-11-25-hc08-succession.md)を参照する。
 
 Macでの[可視化実習](learning/2026-11-19-hc08-visualization.md)と[XGBoost実行結果](learning/2026-11-20-hc08-xgboost.md)は、再現可能な記録として保存した。
 

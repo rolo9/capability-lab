@@ -18,7 +18,7 @@ The [learning roadmap](ROADMAP.md) defines the curriculum. Before asking the Hum
 
 ## Reproducible learning experience
 
-The current scope, coverage, open gaps and next work are maintained in [README Current](README.md#current--hc08-2026-10-31), not in accumulating session instructions inside this contract.
+The current scope, coverage, open gaps and next work are maintained in [README Current](README.md#current--hc09-2026-11-25), not in accumulating session instructions inside this contract.
 
 A reader should be able to follow repository instructions to repeat the core learning experiments within the explicitly tested environment, with substantially equivalent results and an explanation of the reasoning. Record prerequisites, build/start/mount/import steps, data inputs, execution order, expected results and verification evidence when implementing a workflow. A local Mac bind mount is valid if its method is documented and does not rely on unpublished state or a particular user's absolute path.
 
