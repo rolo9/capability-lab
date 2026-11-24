@@ -75,3 +75,58 @@ for node, answer, labels in [("left", "はい", left), ("right", "いいえ", ri
     prediction = int(ones > zeros)
     print(f'  root -->|{answer}| {node}["0が{zeros}件、1が{ones}件。予測は{prediction}"]')
 ```
+
+## 木の深さと過学習
+
+深さは根から葉までの最大分岐回数。深い木は細かい条件を表現できる。学習用で覚えた細かい条件が新しい例に通用しないことを過学習という。今回は[手書き数字の実習](2026-11-23-digit-classification.md)と同じ1074枚で学習、359枚で比較し、深さの上限だけを変えた。前回結果を確認した364枚は使っていない。予測は `predict` の既定の分類。比較条件は再現率80%以上、誤検出率10%以下。
+
+| 深さの上限 | 実際の深さ | 学習で8を拾う | 検証で8を拾う | 検証で8以外を誤検出 |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 1 | 0/104 | 0/35（0%） | 0/324 |
+| 3 | 3 | 69/104 | 23/35（65.7%） | 14/324 |
+| 6 | 6 | 93/104 | 24/35（68.6%） | 3/324 |
+| 上限なし | 10 | 104/104 | 23/35（65.7%） | 5/324 |
+
+上限なしは学習で全件正解だった一方、検証では深さ6より見逃しと誤検出が増えた。今回の4候補はいずれも検証の再現率が目標未達。深さを増やすだけで採用判断はできない。陽性にするしきい値の調整は別の比較になる。
+
+### 実行したPython
+
+[固定版データ](https://github.com/scikit-learn/scikit-learn/blob/1.8.0/sklearn/datasets/data/digits.csv.gz)のパスを引数に渡す。gzipを読み、数字ごとに分ける。各行の先頭64列を入力、最後の列を「8か」の正解に変える。`fit` は分岐を学習し、`predict` は入力を葉まで通して判定する。`confusion_matrix` はその判定と正解を照合する。`labels=[False, True]` の順なので、平らにするとTN・FP・FN・TP。実行環境はクラウドのPython。
+
+```python
+import csv
+import gzip
+import random
+from statistics import mean
+from sys import argv
+
+with gzip.open(argv[1], "rt", newline="") as file:
+    rows = [list(map(int, row)) for row in csv.reader(file)]
+
+# 各数字を別々に混ぜ、60/20/20に分ける。
+rng = random.Random(8)
+train, valid, final = [], [], []
+for digit in range(10):
+    group = [row for row in rows if row[-1] == digit]
+    rng.shuffle(group)
+    n = len(group)
+    train.extend(group[:3*n//5])
+    valid.extend(group[3*n//5:4*n//5])
+    final.extend(group[4*n//5:])
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import confusion_matrix
+
+X_train = [row[:-1] for row in train]
+y_train = [row[-1] == 8 for row in train]
+X_valid = [row[:-1] for row in valid]
+y_valid = [row[-1] == 8 for row in valid]
+
+for depth in (1, 3, 6, None):
+    model = DecisionTreeClassifier(max_depth=depth, random_state=8)
+    model.fit(X_train, y_train)
+    print(depth, model.get_depth(), model.get_n_leaves())
+    for X, y in [(X_train, y_train), (X_valid, y_valid)]:
+        tn, fp, fn, tp = confusion_matrix(y, model.predict(X), labels=[False, True]).ravel()
+        print(tn, fp, fn, tp, round(tp/(tp+fn)*100,1), round(fp/(fp+tn)*100,1))
+```
