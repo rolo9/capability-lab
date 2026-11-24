@@ -12,6 +12,7 @@
 | 決定木・CART・ジニ不純度 | [どの境界で分けるか](2026-11-24-decision-tree-first-split.md#概念と計算) | [6件の計算・木の図・Python](2026-11-24-decision-tree-first-split.md#6件から分岐を作る) |
 | 採用基準・最終テスト・ホールドアウト | [比較前に決めた設計](2026-11-24-classifier-acceptance.md#比較前に決めた設計) | [検証で選び、最終テストで判断](2026-11-24-classifier-acceptance.md#検証で選び最終テストで判断する) |
 | 勾配ブースティング・残差・学習率 | [木を足して補正する意味](2026-11-24-gradient-boosting.md) | [4件の途中出力とPython](2026-11-24-gradient-boosting.md#pythonの入力と実行出力) |
+| XGBoost・L2正則化・葉の重み | [補正値を抑える式](2026-11-24-xgboost-leaf-weights.md#1-式が意味すること) | [同じ4件でのPythonと出力](2026-11-24-xgboost-leaf-weights.md#3-pythonの入力と実行出力) |
 
 iPhoneで思い出したいときは、まず概念のリンクを開く。式や表を読む前に一言で意味を思い出し、必要なら実習のリンクから具体例とコードをたどる。
 

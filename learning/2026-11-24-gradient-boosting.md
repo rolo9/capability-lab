@@ -84,3 +84,5 @@ stage 2 residual before [-0.667, -0.667, 1.333, 0.0]
 |   |--- value: [0.67]
 prediction [0.0, 0.0, 1.333, 6.667]
 ```
+
+続きは [XGBoostで葉の補正値をどう抑えるか](2026-11-24-xgboost-leaf-weights.md)。
