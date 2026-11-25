@@ -1,5 +1,7 @@
 # 単元1　平均が0 gでも、測定のずれはある
 
+**実行環境**　[Docker環境構築編（Apple Silicon Mac）](../../../docs/docker-setup-mac.md)で、初回のセットアップと動作確認ができます。
+
 **今回の問い**　100 gのおもりを繰り返し量ったとき、ずれの平均が0 gなら、そのセンサーは毎回ほぼ正しく量れていると言えるでしょうか。
 
 [学習マップ](../../../ROADMAP.md)の「観測とばらつき」から始めます。この回は、**表の1行を説明し、全体平均と温度別の集計から何が分かるかを言える**ところまでです。
@@ -43,7 +45,7 @@
 
 ### Dockerで実行する
 
-この教材のファイルがあるチェックアウトで、[既存の開発環境](../../../docs/reproduce.md#5-open-jupyter-for-development)を使います。Macのターミナルで、Jupyterコンテナが停止中ならリポジトリのルートから `make up` で起動します。すでに起動中で、そのチェックアウトがマウントされていれば、次のコマンドから実行できます。
+[Docker環境構築編](../../../docs/docker-setup-mac.md)で教材フォルダからコンテナを起動したら、Macのターミナルで次を実行します。
 
 ```sh
 docker exec -w /app capability-lab-jupyter python learning/statistics-ai/01-observations/observe.py

@@ -16,6 +16,8 @@
 
 ## 技術選択と実践
 
+Pythonを実行する際は、[Docker環境構築編（Apple Silicon Mac）](docs/docker-setup-mac.md)から始める。各単元の冒頭にこの共通入口を置き、その回に追加で必要な準備があれば単元内で示す。
+
 | 学ぶ順 | 自分で判断できること | 次に生まれる問い |
 | --- | --- | --- |
 | 1. 実行場所とファイルを把握する | シェルの現在地、ホストとコンテナ、JupyterとPythonの実行場所を把握し、読み込むファイルと書き込み先を説明する | 動かないとき、まず何を確認するか |
@@ -69,4 +71,4 @@ Notebook・テスト・公開Live Demoは、それぞれの成果物に必要な
 
 READMEのCurrentから再開地点をたどり、日付付き記録と実物から経緯・結果を回収する。切替の要否は、その地点で成果を復元できるかと稼働の信頼性を見て判断する。別チャットの起動が必要な場合は、宛先と、正本の参照先・再取得・最初の作業を含む短いコピー用Triggerを示す。[AI Native OS Protocol](https://github.com/rolo9/ai-native-os/blob/main/00_System/AI-Collaboration-and-Context-Protocol.md)を参照する。
 
-統計・AIは[第1単元「観測とばらつき」](learning/statistics-ai/01-observations/README.md)を作成・実行確認した。次の教材は、同じセンサーの測定表から平均と直線の予測を比べ、未知の測定で評価する問いにつなぐ。技術選択と実践の初回候補は「どこで動き、どこに保存されるか」。
+統計・AIは[第1単元「観測とばらつき」](learning/statistics-ai/01-observations/README.md)を作成・実行確認した。次の教材は、同じセンサーの測定表から平均と直線の予測を比べ、未知の測定で評価する問いにつなぐ。技術選択と実践は[Docker環境構築編](docs/docker-setup-mac.md)から、「どこで動き、どこに保存されるか」へ進む。
