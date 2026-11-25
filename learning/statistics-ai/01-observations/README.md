@@ -41,11 +41,15 @@
 2. **温度とずれを組にする。** `observations.append((temperature, offset))` で、先頭には `(20, -2)` が入ります。括弧内の2つの値は、順に温度（℃）とずれ（g）です。
 3. **全体と温度別で集計する。** `if temperature == target_temperature` で、指定した温度の行からだけずれを集めます。20 ℃なら `[-2, -1, 0]` です。`mean(offsets)` は平均、`max(offsets) - min(offsets)` は範囲を返します。
 
-リポジトリのルートから実行できます。Pythonの標準ライブラリだけを使います。
+### Dockerで実行する
+
+この教材のファイルがあるチェックアウトで、[既存の開発環境](../../../docs/reproduce.md#5-open-jupyter-for-development)を使います。Macのターミナルで、Jupyterコンテナが停止中ならリポジトリのルートから `make up` で起動します。すでに起動中で、そのチェックアウトがマウントされていれば、次のコマンドから実行できます。
 
 ```sh
-python3 learning/statistics-ai/01-observations/observe.py
+docker exec -w /app capability-lab-jupyter python learning/statistics-ai/01-observations/observe.py
 ```
+
+`docker exec` は起動中のコンテナ内でコマンドを実行します。`-w /app` でリポジトリのルートに移り、コンテナ内のPythonでスクリプトを動かします。スクリプトは隣にあるCSVを読みます。Mac側へのPythonや追加パッケージのインストールは不要です。
 
 ```text
 測定1: 20 ℃、ずれ -2 g
