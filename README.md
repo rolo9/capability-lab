@@ -29,6 +29,10 @@ Choose Web UI/framework/hosting when browser interactions and runtime requiremen
 
 学習順、各単元の構成、ランタイム切替を検討する地点は[現行ロードマップ](ROADMAP.md)を参照。既存教材は[学習索引](learning/README.md)にある。設計を見直した経緯は[HC08 → HC09の引き継ぎ](learning/2026-11-25-hc08-succession.md)と[旧ロードマップ](https://github.com/rolo9/capability-lab/blob/13a4b3229de24843b1ee11275389912f16489a13/ROADMAP.md)に残している。
 
+### Macの学習環境
+
+開発は Apple Silicon Mac・Docker Desktop・JupyterLab を想定する。過去に観測したMac側の教材フォルダは `~/workspace/capability-lab`。教材フォルダ全体をコンテナ内の `/app` に接続する方式へ移行し、2026-11-09にMacで `make up` と `make jupyter` の起動を確認した。現行の [Makefile](Makefile) も、`make up` を実行した教材フォルダを `/app` につなぐ。今のMacの起動状態やローカルの版を判断するときは、日付付きの記録と区別する。 [フォルダの観測記録](learning/2026-10-31-hc08-replay-preparation.md) · [Macでの起動記録](learning/2026-11-09-hc08-replay-verification.md)
+
 ### HC08の実装・検証記録
 
 This section is the current entry point. The [learning contract](LEARNING_CONTRACT.md) defines collaboration; executable files establish what is actually implemented. Dated notes are historical evidence and context, not competing next-step instructions.
