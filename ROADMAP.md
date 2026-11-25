@@ -1,6 +1,6 @@
 # Human Capability 学習ロードマップ
 
-> **2026-11-25 JST — HC09の設計を確定。教材制作・実習は準備前。**
+> **2026-11-25 JST — HC09の設計を確定。統計・AIの第1単元を作成・実行確認。**
 > 旧ロードマップと保留前の再開案は、[HC08時点のロードマップ](https://github.com/rolo9/capability-lab/blob/13a4b3229de24843b1ee11275389912f16489a13/ROADMAP.md)と[引き継ぎ記録](learning/2026-11-25-hc08-succession.md)で振り返れる。
 
 ## 目的と二本柱
@@ -69,4 +69,4 @@ Notebook・テスト・公開Live Demoは、それぞれの成果物に必要な
 
 READMEのCurrentから再開地点をたどり、日付付き記録と実物から経緯・結果を回収する。切替の要否は、その地点で成果を復元できるかと稼働の信頼性を見て判断する。別チャットの起動が必要な場合は、宛先と、正本の参照先・再取得・最初の作業を含む短いコピー用Triggerを示す。[AI Native OS Protocol](https://github.com/rolo9/ai-native-os/blob/main/00_System/AI-Collaboration-and-Context-Protocol.md)を参照する。
 
-設計確定時点の着手候補は、技術選択と実践の「どこで動き、どこに保存されるか」と、統計・AIの「表の1行とばらつきから何を読めるか」。着手する柱は次の指示に従う。
+統計・AIは[第1単元「観測とばらつき」](learning/statistics-ai/01-observations/README.md)を作成・実行確認した。次の教材は、同じセンサーの測定表から平均と直線の予測を比べ、未知の測定で評価する問いにつなぐ。技術選択と実践の初回候補は「どこで動き、どこに保存されるか」。

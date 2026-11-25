@@ -22,10 +22,10 @@ Choose Web UI/framework/hosting when browser interactions and runtime requiremen
 
 ## Current — HC09, 2026-11-25
 
-**二本柱の学習設計を確定。教材制作・実習の着手前。**
+**二本柱の学習設計を確定し、統計・AIの第1単元を作成・実行確認。**
 
 - **技術選択と実践**では、Dockerの経験から「何をどこで動かし、どう再実行するか」を学ぶ。最初の候補は、Notebookの実行場所と保存先を説明する単元。
-- **統計・AIの基礎**では、データの観測とばらつきから、評価、機械学習、深層学習、Physical AIへつなぐ。最初の候補は、表の1行と平均で何を読めるかを確かめる単元。
+- **統計・AIの基礎**では、データの観測とばらつきから、評価、機械学習、深層学習、Physical AIへつなぐ。[第1単元「平均が0 gでも、測定のずれはある」](learning/statistics-ai/01-observations/README.md)から読める。教材とPython出力は検証済み。次は同じ表で平均を返す予測と傾きのある予測を比べる。
 
 学習順、各単元の構成、ランタイム切替を検討する地点は[現行ロードマップ](ROADMAP.md)を参照。既存教材は[学習索引](learning/README.md)にある。設計を見直した経緯は[HC08 → HC09の引き継ぎ](learning/2026-11-25-hc08-succession.md)と[旧ロードマップ](https://github.com/rolo9/capability-lab/blob/13a4b3229de24843b1ee11275389912f16489a13/ROADMAP.md)に残している。
 
