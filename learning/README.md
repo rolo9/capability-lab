@@ -9,6 +9,7 @@
 - 共通の実行環境 — [Docker環境構築編（Apple Silicon Mac）](../docs/docker-setup-mac.md)
 
 - 統計・AIの基礎 1 — [平均が0 gでも、測定のずれはある](statistics-ai/01-observations/README.md)
+- 統計・AIの基礎 2 — [温度で予測を変えると、何がよくなるか](statistics-ai/02-reading-a-line/README.md)
 
 ## まず概念を思い出す
 
